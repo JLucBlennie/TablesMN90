@@ -1,6 +1,6 @@
 .root {
 	display: block; 
-	/* -fx-background-color: olivedrab; */
+	-fx-background-color: transparent;
 	/*-fx-background-image: url("img/background.png");*/
 }  
 

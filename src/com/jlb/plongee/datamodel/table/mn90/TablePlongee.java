@@ -51,11 +51,11 @@ public class TablePlongee {
 				mLignes.add(ligne);
 			}
 		} catch (IOException e) {
-			MN90.logger.error(TablePlongee.class, "Probleme durant la lecture du fichier " + FILENAME, e);
+			MN90.getLogger().error(TablePlongee.class, "Probleme durant la lecture du fichier " + FILENAME, e);
 		}
-		MN90.logger.debug(TablePlongee.class, "Avant Tri : " + mLignes);
+		MN90.getLogger().debug(TablePlongee.class, "Avant Tri : " + mLignes);
 		Collections.sort(mLignes, new Comparateur());
-		MN90.logger.debug(TablePlongee.class, "Apres Tri : " + mLignes);
+		MN90.getLogger().debug(TablePlongee.class, "Apres Tri : " + mLignes);
 	}
 
 	private LignePalierGPS mLigne;
@@ -80,7 +80,7 @@ public class TablePlongee {
 			}
 		}
 
-		MN90.logger.debug(this, "Ligne courante (" + profondeur + "," + temps + ") : " + ligneCourante);
+		MN90.getLogger().debug(this, "Ligne courante (" + profondeur + "," + temps + ") : " + ligneCourante);
 		return ligneCourante;
 	}
 

@@ -1,5 +1,7 @@
 package com.jlb.plongee.ihm.panels;
 
+import com.jlb.plongee.application.MN90;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,7 +13,8 @@ import javafx.scene.layout.RowConstraints;
 
 public class MN90View extends GridPane {
 
-	public Button exitButton = new Button("Quitter");
+	private Button mExitButton = new Button(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.mn90.exit.button"));
 
 	public MN90View(Pane plongeurPane, Pane compartimentPane) {
 		this.setPadding(new Insets(10, 10, 10, 10));
@@ -30,7 +33,11 @@ public class MN90View extends GridPane {
 
 		this.add(plongeurPane, 0, 0);
 		this.add(compartimentPane, 0, 1);
-		this.exitButton.setAlignment(Pos.CENTER);
-		this.add(this.exitButton, 6, 4);
+		this.mExitButton.setAlignment(Pos.CENTER);
+		this.add(this.mExitButton, 6, 4);
+	}
+
+	public Button getExitButton() {
+		return mExitButton;
 	}
 }

@@ -4,21 +4,21 @@ import com.jlb.plongee.ihm.Controller;
 
 public class CompartimentCtrl implements Controller<CompartimentView> {
 
-	CompartimentView view;
+	CompartimentView mView;
 
 	public CompartimentCtrl() {
-		view = new CompartimentView();
+		mView = new CompartimentView();
 		init();
 	}
 
 	@Override
 	public CompartimentView getView() {
-		return view;
+		return mView;
 	}
 
 	@Override
 	public void init() {
-		// view.setStyle("-fx-border-color: #FFFB3E;-fx-border-width: 2px;");
+		// mView.setStyle("-fx-border-color: #FFFB3E;-fx-border-width: 2px;");
 	}
 
 }

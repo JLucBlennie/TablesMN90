@@ -1,23 +1,25 @@
 package com.jlb.plongee.ihm.panels.plongeur;
 
+import com.jlb.plongee.application.MN90;
+
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class PlongeurView extends GridPane {
 
-	public Label plongeurlabel = new Label("Plongeur : ");
-	public TextField plongeurName = new TextField();
-	public Label plongeesLabel = new Label("Plongees : ");
-	public ListView<String> plongeesListe = new ListView<String>();
+	private Label mPlongeurLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongeur.nom.label"));
+	private TextField mPlongeurName = new TextField();
 
-	public PlongeurView() {
-		this.add(this.plongeurlabel, 0, 0);
-		this.add(this.plongeurName, 1, 0);
-		this.add(this.plongeesLabel, 0, 1);
-		this.add(this.plongeesListe, 0, 2, 2, 1);
+	public PlongeurView(Pane plongeesView) {
+		this.mPlongeurLabel.setPadding(new Insets(0, 5, 5, 2));
+		this.add(this.mPlongeurLabel, 0, 0);
+		this.mPlongeurName.setPadding(new Insets(0, 2, 5, 2));
+		this.add(this.mPlongeurName, 1, 0);
+		this.add(plongeesView, 0, 1, 2, 1);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		// this.setGridLinesVisible(true);
 
