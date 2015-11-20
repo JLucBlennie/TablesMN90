@@ -17,6 +17,7 @@ public class MN90View extends GridPane {
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.mn90.exit.button"));
 
 	public MN90View(Pane plongeurPane, Pane compartimentPane) {
+		MN90.getLogger().debug(this, "Contruction de la vue MN90");
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setHgap(5);
 		this.setVgap(5);
@@ -30,6 +31,8 @@ public class MN90View extends GridPane {
 		rowConstraints.setFillHeight(true);
 		rowConstraints.setVgrow(Priority.ALWAYS);
 		this.getRowConstraints().add(rowConstraints);
+
+		MN90.getLogger().debug(this, "Ajout des composants à la vue MN90");
 
 		this.add(plongeurPane, 0, 0);
 		this.add(compartimentPane, 0, 1);

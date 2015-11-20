@@ -34,6 +34,10 @@ public class CompartimentView extends GridPane {
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.compartiment.comp120minprogress"), 25, 100);
 
 	public CompartimentView() {
+		MN90.getLogger().debug(this, "Contruction de la vue Compartiment");
+		this.setPadding(new Insets(10, 10, 10, 10));
+
+		MN90.getLogger().debug(this, "Ajout des composants à la vue Compartiment");
 		this.add(this.mComp5minProgressBar, 0, 0);
 		this.add(this.mComp7minProgressBar, 1, 0);
 		this.add(this.mComp10minProgressBar, 2, 0);
@@ -46,7 +50,6 @@ public class CompartimentView extends GridPane {
 		this.add(this.mComp80minProgressBar, 9, 0);
 		this.add(this.mComp100minProgressBar, 10, 0);
 		this.add(this.mComp120minProgressBar, 11, 0);
-		this.setPadding(new Insets(10, 10, 10, 10));
 		// this.setGridLinesVisible(true);
 	}
 }

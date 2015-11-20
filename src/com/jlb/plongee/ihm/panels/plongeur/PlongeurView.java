@@ -15,10 +15,15 @@ public class PlongeurView extends GridPane {
 	private TextField mPlongeurName = new TextField();
 
 	public PlongeurView(Pane plongeesView) {
+		MN90.getLogger().debug(this, "Contruction de la vue Plongeur");
+
 		this.mPlongeurLabel.setPadding(new Insets(0, 5, 5, 2));
 		this.add(this.mPlongeurLabel, 0, 0);
 		this.mPlongeurName.setPadding(new Insets(0, 2, 5, 2));
+		this.mPlongeurName.setStyle("-fx-background-color: transparent;");
 		this.add(this.mPlongeurName, 1, 0);
+
+		MN90.getLogger().debug(this, "Ajout des composants à la vue Plongeur");
 		this.add(plongeesView, 0, 1, 2, 1);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		// this.setGridLinesVisible(true);

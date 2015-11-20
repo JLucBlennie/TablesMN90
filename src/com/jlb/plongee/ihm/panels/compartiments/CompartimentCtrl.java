@@ -1,5 +1,6 @@
 package com.jlb.plongee.ihm.panels.compartiments;
 
+import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.ihm.Controller;
 
 public class CompartimentCtrl implements Controller<CompartimentView> {
@@ -7,6 +8,7 @@ public class CompartimentCtrl implements Controller<CompartimentView> {
 	CompartimentView mView;
 
 	public CompartimentCtrl() {
+		MN90.getLogger().debug(this, "Ctor de CompartimentCtrl");
 		mView = new CompartimentView();
 		init();
 	}
@@ -18,6 +20,7 @@ public class CompartimentCtrl implements Controller<CompartimentView> {
 
 	@Override
 	public void init() {
+		MN90.getLogger().debug(this, "Initialisation de la vue Compartiment");
 		// mView.setStyle("-fx-border-color: #FFFB3E;-fx-border-width: 2px;");
 	}
 

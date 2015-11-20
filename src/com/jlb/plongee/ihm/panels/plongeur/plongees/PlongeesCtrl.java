@@ -3,6 +3,7 @@ package com.jlb.plongee.ihm.panels.plongeur.plongees;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.ihm.Controller;
 
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ public class PlongeesCtrl implements Controller<PlongeesView> {
 	private PlongeesView mView;
 
 	public PlongeesCtrl() {
+		MN90.getLogger().debug(this, "Ctor de PlongeesCtrl");
 		mView = new PlongeesView();
 		init();
 	}
@@ -24,6 +26,7 @@ public class PlongeesCtrl implements Controller<PlongeesView> {
 
 	@Override
 	public void init() {
+		MN90.getLogger().debug(this, "Initialisation de la vue Plongees");
 		List<String> list = new ArrayList<String>();
 		list.add("Plongee 1");
 		list.add("Plongee 2");

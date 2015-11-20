@@ -25,19 +25,23 @@ public class PlongeesView extends GridPane {
 	private Button mSupprButton = new Button();
 
 	public PlongeesView() {
+		MN90.getLogger().debug(this, "Contruction de la vue Plongees");
+
 		this.add(this.mPlongeesLabel, 0, 0);
 		this.add(this.mPlongeesListe, 0, 1, 2, 1);
 
 		this.mAjoutButton.setMaxSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
 		this.mAjoutButton.setMinSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
 		this.mAjoutButton.setPrefSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
+		this.mSupprButton.setMaxSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
+		this.mSupprButton.setMinSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
 		this.mSupprButton.setPrefSize(TAILLE_BOUTON_WIDTH, TAILLE_BOUTON_HEIGHT);
 		this.mAjoutButton.setStyle("-fx-background-image: url('" + mAjoutImagePath
 				+ "'); -fx-background-repeat: no-repeat; -fx-background-position: center;");
-		this.mSupprButton.setStyle("-fx-font-weight: bold;");
 		this.mSupprButton.setStyle("-fx-background-image: url('" + mSupprImagePath
 				+ "'); -fx-background-repeat: no-repeat; -fx-background-position: center;");
 
+		MN90.getLogger().debug(this, "Ajout des composants à la vue Plongees");
 		HBox buttonsContainer = new HBox(10);
 		buttonsContainer.getChildren().add(this.mAjoutButton);
 		buttonsContainer.getChildren().add(this.mSupprButton);
