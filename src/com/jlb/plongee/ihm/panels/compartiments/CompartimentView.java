@@ -50,6 +50,6 @@ public class CompartimentView extends GridPane {
 		this.add(this.mComp80minProgressBar, 9, 0);
 		this.add(this.mComp100minProgressBar, 10, 0);
 		this.add(this.mComp120minProgressBar, 11, 0);
-		// this.setGridLinesVisible(true);
+		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 	}
 }

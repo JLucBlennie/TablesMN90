@@ -1,7 +1,10 @@
 .root {
-	display: block; 
-	-fx-background-color: lightsteelblue;
-	/*-fx-background-image: url("img/background.png");*/
+	display: block;
+	-fx-background-color: rgba(0, 0, 0, 0);
+	-fx-background-image: url("img/background.png");
+	-fx-background-repeat: stretch;
+	-fx-background-size: 1400 800;
+	-fx-background-position: center center;
 }  
 
 /*
@@ -45,7 +48,7 @@
 }
 
 .text-field, .label {
-	-fx-text-fill: blue;
+	-fx-text-fill: lightsteelblue;
     -fx-font-size: 12pt;
     -fx-font-family: "Comic sans MS";
 }

@@ -27,6 +27,7 @@ public class PlongeesCtrl implements Controller<PlongeesView> {
 	@Override
 	public void init() {
 		MN90.getLogger().debug(this, "Initialisation de la vue Plongees");
+		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		List<String> list = new ArrayList<String>();
 		list.add("Plongee 1");
 		list.add("Plongee 2");

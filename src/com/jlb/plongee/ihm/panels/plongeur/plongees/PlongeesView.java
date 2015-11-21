@@ -49,6 +49,7 @@ public class PlongeesView extends GridPane {
 		this.add(buttonsContainer, 0, 2, 2, 1);
 
 		this.setPadding(new Insets(10, 10, 10, 10));
+		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 	}
 
 	public ListView<String> getPlongeesListe() {

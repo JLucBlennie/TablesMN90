@@ -29,7 +29,9 @@ public class MN90Ctrl implements Controller<MN90View> {
 	@Override
 	public void init() {
 		MN90.getLogger().debug(this, "Initialisation de la vue MN90");
+		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		// mView.setStyle("-fx-border-color: #2e8b57;-fx-border-width: 2px;");
+		// mView.setOpacity(20);
 		mView.getExitButton().setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

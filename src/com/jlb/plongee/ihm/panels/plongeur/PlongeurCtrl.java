@@ -24,6 +24,7 @@ public class PlongeurCtrl implements Controller<PlongeurView> {
 	@Override
 	public void init() {
 		MN90.getLogger().debug(this, "Initialisation de la vue Plongeur");
+		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		// mView.setStyle("-fx-border-color: #3eFBFF;-fx-border-width: 2px;");
 	}
 

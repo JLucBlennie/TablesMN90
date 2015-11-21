@@ -21,6 +21,7 @@ public class CompartimentCtrl implements Controller<CompartimentView> {
 	@Override
 	public void init() {
 		MN90.getLogger().debug(this, "Initialisation de la vue Compartiment");
+		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 		// mView.setStyle("-fx-border-color: #FFFB3E;-fx-border-width: 2px;");
 	}
 
