@@ -1,14 +1,13 @@
 package com.jlb.plongee.ihm.panels;
 
 import com.jlb.plongee.application.MN90;
+import com.jlb.plongee.ihm.MN90Constants;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -18,18 +17,15 @@ import javafx.scene.text.TextAlignment;
 
 public class MN90View extends GridPane {
 
-	private Button mExitButton = new Button(
-			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.mn90.exit.button"));
+	private Button mExitButton = new Button();
 
 	private Label mVersion = new Label("Version : " + MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.version"));
-	private ImageView imvTitre = new ImageView();
-	private Image imgTitre = new Image(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre.img"));
-	private ImageView imvFond = new ImageView();
-	private Image imgFond = new Image(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.fond.img"));
+	private Label mApplicationName = new Label(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre") + "\n"
+			+ MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.sous-titre"));
 
 	public MN90View(Pane plongeurPane, Pane compartimentPane) {
 		MN90.getLogger().debug(this, "Contruction de la vue MN90");
-		this.setPadding(new Insets(10, 10, 10, 10));
+		this.setPadding(new Insets(20, 20, 20, 20));
 		this.setHgap(5);
 		this.setVgap(5);
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
@@ -47,26 +43,21 @@ public class MN90View extends GridPane {
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue MN90");
 
-		// this.add(imvFond, 0, 0, 6, 2);
-		// imvFond.setImage(imgFond);
-		// imvFond.setFitWidth(100);
-		// imvFond.setPreserveRatio(true);
-		// imvFond.setSmooth(true);
-		// imvFond.setCache(true);
+		this.mApplicationName.setId("applicationName");
+		this.mApplicationName.setTextAlignment(TextAlignment.CENTER);
+		this.add(mApplicationName, 0, 0, 6, 2);
 
-		this.add(imvTitre, 0, 0, 6, 2);
-		imvTitre.setImage(imgTitre);
-		imvTitre.setFitHeight(100);
-		imvTitre.setPreserveRatio(true);
-		imvTitre.setSmooth(true);
-		imvTitre.setCache(true);
-
+		this.mExitButton.setMaxSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
+		this.mExitButton.setMinSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
+		this.mExitButton.setPrefSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
+		this.mExitButton.setId("exitButton");
+		GridPane.setHalignment(this.mExitButton, HPos.CENTER);
+		this.add(this.mExitButton, 2, 0, 2, 1);
 		this.add(plongeurPane, 0, 0);
 		this.add(compartimentPane, 0, 1);
+		this.mVersion.setId("version");
 		this.mVersion.setTextAlignment(TextAlignment.CENTER);
 		this.add(mVersion, 0, 2);
-		GridPane.setHalignment(this.mExitButton, HPos.CENTER);
-		this.add(this.mExitButton, 6, 2);
 	}
 
 	public Button getExitButton() {

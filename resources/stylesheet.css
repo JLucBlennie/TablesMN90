@@ -5,15 +5,8 @@
 	-fx-background-repeat: stretch;
 	-fx-background-size: 1400 800;
 	-fx-background-position: center center;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 10, 0.5, 1, 1);  
 }  
-
-/*
-1. Odd rows with white background color;
-2. ListView: when mouse over an item, highlight with a blue shade;
-3. ListView: when an item is selected, paint it with a gradient;
-4. ListView: when focus is lost from ListView, selected item should be painted with gradient;
-5. ListView: all items will start with text-fill black. But on mouse over and/or selected it will change to white.
-*/
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     /* 3:, 4: */
@@ -51,53 +44,29 @@
 	-fx-text-fill: lightsteelblue;
     -fx-font-size: 12pt;
     -fx-font-family: "Comic sans MS";
+	-fx-font-weight: bold;
+	-fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 5, 0, 0, 1);  
 }
 
-/* 
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-.button {
-    -fx-padding: 5 22 5 22;   
-    -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
-    -fx-background-radius: 0;
-    -fx-background-color: lightgrey;
-    -fx-font-family: "Comic sans MS";
-    -fx-font-size: 11pt;
-    -fx-text-fill: blue;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+#version {
+    -fx-font-size: 8pt;
+    -fx-font-style: italic;
 }
 
-.button:hover {
-    -fx-background-color: lightslategrey;
+#applicationName {
+    -fx-font-size: 18pt;
+	-fx-effect: dropshadow(three-pass-box, rgba(5, 5, 5, 0.7), 5, 0, 0, 1);  
 }
 
-.button:pressed, .button:default:hover:pressed {
-  -fx-background-color: white;
-  -fx-text-fill: blue;
+#exitButton {
+	-fx-background-color: rgba(0, 0, 0, 0); 
+	-fx-background-image: url("img/ExitButtonWhite.png");
+	-fx-background-repeat: stretch; 
+	-fx-background-size: 50 50;
+	-fx-background-position: center center;	
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 5, 0.0 , 0, 1);
 }
 
-.button:focused {
-    -fx-border-color: white, white;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
-.button:disabled, .button:default:disabled {
-    -fx-opacity: 0.4;
-    -fx-background-color: #1d1d1d;
-    -fx-text-fill: white;
-}
-
-.button:default {
-    -fx-background-color: -fx-focus-color;
-    -fx-text-fill: blue;
-}
-
-.button:default:hover {
-    -fx-background-color: derive(-fx-focus-color,30%);
+#exitButton:hover {
+	-fx-background-image: url("img/ExitButtonGreen.png");
 }

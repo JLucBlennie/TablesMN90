@@ -12,7 +12,7 @@ public class PlongeurView extends GridPane {
 
 	private Label mPlongeurLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongeur.nom.label"));
-	private TextField mPlongeurName = new TextField();
+	private TextField mPlongeurName = new TextField("Moi");
 	private Label mTableLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongeur.table.label"));
 	private TextField mTable = new TextField(MN90.class.getSimpleName());
