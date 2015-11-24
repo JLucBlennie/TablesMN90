@@ -45,14 +45,14 @@ public class MN90View extends GridPane {
 
 		this.mApplicationName.setId("applicationName");
 		this.mApplicationName.setTextAlignment(TextAlignment.CENTER);
-		this.add(mApplicationName, 0, 0, 6, 2);
+		this.add(mApplicationName, 0, 0, 2, 1);
 
 		this.mExitButton.setMaxSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
 		this.mExitButton.setMinSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
 		this.mExitButton.setPrefSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
 		this.mExitButton.setId("exitButton");
 		GridPane.setHalignment(this.mExitButton, HPos.CENTER);
-		this.add(this.mExitButton, 2, 0, 2, 1);
+		this.add(this.mExitButton, 1, 0);
 		this.add(plongeurPane, 0, 0);
 		this.add(compartimentPane, 0, 1);
 		this.mVersion.setId("version");

@@ -2,17 +2,20 @@ package com.jlb.plongee.ihm.panels.plongeur;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.ihm.Controller;
+import com.jlb.plongee.ihm.panels.plongees.PlongeesCtrl;
 import com.jlb.plongee.ihm.panels.plongeur.exercices.ExercicesCtrl;
 
 public class PlongeurCtrl implements Controller<PlongeurView> {
 
-	private ExercicesCtrl mPlongeesCtrl = new ExercicesCtrl();
+	private ExercicesCtrl mExercicesCtrl = new ExercicesCtrl();
+	private PlongeesCtrl mPlongeesCtrl = new PlongeesCtrl();
+
 	private PlongeurView mView;
 
 	public PlongeurCtrl() {
 		MN90.getLogger().debug(this, "Ctor de PlongeurCtrl");
 
-		mView = new PlongeurView(mPlongeesCtrl.getView());
+		mView = new PlongeurView(mExercicesCtrl.getView(), mPlongeesCtrl.getView());
 		init();
 	}
 

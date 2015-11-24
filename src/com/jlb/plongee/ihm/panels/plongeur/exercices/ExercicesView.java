@@ -20,7 +20,7 @@ public class ExercicesView extends GridPane {
 	private Button mSupprButton = new Button();
 
 	public ExercicesView() {
-		MN90.getLogger().debug(this, "Contruction de la vue Plongees");
+		MN90.getLogger().debug(this, "Contruction de la vue Exercices");
 
 		this.setVgap(5);
 		this.setHgap(5);
@@ -40,7 +40,7 @@ public class ExercicesView extends GridPane {
 		this.mAjoutButton.setId("ajoutExerciceButton");
 		this.mSupprButton.setId("supprExerciceButton");
 
-		MN90.getLogger().debug(this, "Ajout des composants à la vue Plongees");
+		MN90.getLogger().debug(this, "Ajout des composants à la vue Exercices");
 		this.add(this.mExercicesLabel, 0, 0);
 		this.add(this.mExercicesListe, 0, 1, 2, 1);
 

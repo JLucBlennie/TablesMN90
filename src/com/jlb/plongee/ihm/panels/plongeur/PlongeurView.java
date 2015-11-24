@@ -17,7 +17,7 @@ public class PlongeurView extends GridPane {
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongeur.table.label"));
 	private TextField mTable = new TextField(MN90.class.getSimpleName());
 
-	public PlongeurView(Pane plongeesView) {
+	public PlongeurView(Pane exercicesView, Pane plongeesView) {
 		MN90.getLogger().debug(this, "Contruction de la vue Plongeur");
 
 		this.mPlongeurLabel.setPadding(new Insets(0, 5, 5, 2));
@@ -27,7 +27,8 @@ public class PlongeurView extends GridPane {
 		this.add(this.mPlongeurName, 1, 0);
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue Plongeur");
-		this.add(plongeesView, 0, 1, 2, 1);
+		this.add(exercicesView, 0, 1, 2, 1);
+		this.add(plongeesView, 2, 1);
 		this.add(mTableLabel, 0, 2);
 		this.mTable.setStyle("-fx-background-color: transparent;");
 		this.add(mTable, 1, 2);
