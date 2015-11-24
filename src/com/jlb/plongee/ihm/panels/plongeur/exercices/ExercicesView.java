@@ -1,4 +1,4 @@
-package com.jlb.plongee.ihm.panels.plongeur.plongees;
+package com.jlb.plongee.ihm.panels.plongeur.exercices;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.ihm.MN90Constants;
@@ -11,19 +11,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-public class PlongeesView extends GridPane {
+public class ExercicesView extends GridPane {
 
-	private static String mAjoutImagePath = MN90.TABLES_MN90_PROPERTIES
-			.getString("com.jlb.plongee.view.plongees.ajout.image");
-	private static String mSupprImagePath = MN90.TABLES_MN90_PROPERTIES
-			.getString("com.jlb.plongee.view.plongees.suppr.image");
-	private Label mPlongeesLabel = new Label(
-			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongees.nom.label"));
-	private ListView<String> mPlongeesListe = new ListView<String>();
+	private Label mExercicesLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.exercices.nom.label"));
+	private ListView<String> mExercicesListe = new ListView<String>();
 	private Button mAjoutButton = new Button();
 	private Button mSupprButton = new Button();
 
-	public PlongeesView() {
+	public ExercicesView() {
 		MN90.getLogger().debug(this, "Contruction de la vue Plongees");
 
 		this.setVgap(5);
@@ -41,14 +37,12 @@ public class PlongeesView extends GridPane {
 				MN90Constants.TAILLE_BOUTON_HEIGHT_DEFAULT);
 		this.mSupprButton.setPrefSize(MN90Constants.TAILLE_BOUTON_WIDTH_DEFAULT,
 				MN90Constants.TAILLE_BOUTON_HEIGHT_DEFAULT);
-		this.mAjoutButton.setStyle("-fx-background-image: url('" + mAjoutImagePath
-				+ "'); -fx-background-repeat: no-repeat; -fx-background-position: center;");
-		this.mSupprButton.setStyle("-fx-background-image: url('" + mSupprImagePath
-				+ "'); -fx-background-repeat: no-repeat; -fx-background-position: center;");
+		this.mAjoutButton.setId("ajoutExerciceButton");
+		this.mSupprButton.setId("supprExerciceButton");
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue Plongees");
-		this.add(this.mPlongeesLabel, 0, 0);
-		this.add(this.mPlongeesListe, 0, 1, 2, 1);
+		this.add(this.mExercicesLabel, 0, 0);
+		this.add(this.mExercicesListe, 0, 1, 2, 1);
 
 		HBox buttonsContainer = new HBox(10);
 		buttonsContainer.getChildren().add(this.mAjoutButton);
@@ -61,6 +55,6 @@ public class PlongeesView extends GridPane {
 	}
 
 	public ListView<String> getPlongeesListe() {
-		return mPlongeesListe;
+		return mExercicesListe;
 	}
 }

@@ -25,7 +25,7 @@ public class MN90View extends GridPane {
 
 	public MN90View(Pane plongeurPane, Pane compartimentPane) {
 		MN90.getLogger().debug(this, "Contruction de la vue MN90");
-		this.setPadding(new Insets(20, 20, 20, 20));
+		this.setPadding(new Insets(30, 30, 30, 30));
 		this.setHgap(5);
 		this.setVgap(5);
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);

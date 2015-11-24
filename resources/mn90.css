@@ -5,7 +5,6 @@
 	-fx-background-repeat: stretch;
 	-fx-background-size: 1400 800;
 	-fx-background-position: center center;
-	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.7), 10, 0.5, 1, 1);  
 }  
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
@@ -69,4 +68,30 @@
 
 #exitButton:hover {
 	-fx-background-image: url("img/ExitButtonGreen.png");
+}
+
+#ajoutExerciceButton {
+	-fx-background-color: rgba(0, 0, 0, 0); 
+	-fx-background-image: url("img/AjoutButtonBlue.png");
+	-fx-background-repeat: stretch; 
+	-fx-background-size: 30 30;
+	-fx-background-position: center center;	
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 5, 0.0 , 0, 1);
+}
+
+#ajoutExerciceButton:hover {
+	-fx-background-image: url("img/AjoutButtonRed.png");
+}
+
+#supprExerciceButton {
+	-fx-background-color: rgba(0, 0, 0, 0); 
+	-fx-background-image: url("img/SupprButtonBlue.png");
+	-fx-background-repeat: stretch; 
+	-fx-background-size: 30 30;
+	-fx-background-position: center center;	
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.6), 5, 0.0 , 0, 1);
+}
+
+#supprExerciceButton:hover {
+	-fx-background-image: url("img/SupprButtonRed.png");
 }

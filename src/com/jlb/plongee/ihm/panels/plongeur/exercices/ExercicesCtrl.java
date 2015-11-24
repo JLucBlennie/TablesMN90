@@ -1,4 +1,4 @@
-package com.jlb.plongee.ihm.panels.plongeur.plongees;
+package com.jlb.plongee.ihm.panels.plongeur.exercices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,18 +9,18 @@ import com.jlb.plongee.ihm.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class PlongeesCtrl implements Controller<PlongeesView> {
+public class ExercicesCtrl implements Controller<ExercicesView> {
 
-	private PlongeesView mView;
+	private ExercicesView mView;
 
-	public PlongeesCtrl() {
+	public ExercicesCtrl() {
 		MN90.getLogger().debug(this, "Ctor de PlongeesCtrl");
-		mView = new PlongeesView();
+		mView = new ExercicesView();
 		init();
 	}
 
 	@Override
-	public PlongeesView getView() {
+	public ExercicesView getView() {
 		return mView;
 	}
 
