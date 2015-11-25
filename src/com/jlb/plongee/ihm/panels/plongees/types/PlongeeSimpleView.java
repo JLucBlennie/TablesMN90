@@ -11,96 +11,306 @@ import javafx.scene.shape.Line;
 
 public class PlongeeSimpleView extends Group {
 
+	protected Label mHeureDepartLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.heuredepart.label"));
+	protected TextField mHeureDepartValue = new TextField("09:30");
+	protected Line mSurface = new Line();
+	protected Line mSurface2 = new Line();
+	protected Line mSurface3 = new Line();
+	protected Line mSurface4 = new Line();
+	protected Line mSurface5 = new Line();
+	protected Line mDescente = new Line();
+	protected Line mFond = new Line();
+	protected Label mProfMaxLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.profmax.label"));
+	protected TextField mProfMaxValue = new TextField("30");
+	protected Label mProfMaxUniteLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.profmax.unite.label"));
+	protected Label mHeureSortieLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.heuresortie.label"));
+	protected TextField mHeureSortieValue = new TextField("09:55");
+	protected Label mDureePlongeeLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.dureeplongee.label"));
+	protected TextField mDureePlongeeValue = new TextField("40");
+	protected Label mDureePlongeeUniteLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
+	protected Line mDebutRemontee = new Line();
+	protected Line mPalier3m = new Line();
+	protected Label mPalier3mLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.palier3m.label"));
+	protected TextField mDureePalier3mValue = new TextField("50");
+	protected Label mDureePalier3mUniteLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
+	protected Line mRemonteeFin = new Line();
+	protected Label mDTRLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.dtr.label"));
+	protected TextField mDTRValue = new TextField("40");
+	protected Label mDTRUniteLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
+	protected Line mMarkDebut = new Line();
+	protected Line mFlecheDureePlongee = new Line();
+	protected Line mFlecheDureePlongee2 = new Line();
+	protected Line mFlecheDureePlongee3 = new Line();
+	protected Line mFlecheDureePlongee4 = new Line();
+	protected Line mFlecheDureePlongee5 = new Line();
+	protected Line mMarkDureePlongee = new Line();
+	protected Line mMarkFinPlongee = new Line();
+	protected Line mFlecheDTRPlongee = new Line();
+	protected Line mFlecheDTRPlongee2 = new Line();
+	protected Line mFlecheDTRPlongee3 = new Line();
+
 	public PlongeeSimpleView() {
 		MN90.getLogger().debug(this, "Construction de la vue PlongeeSimple");
-		Label heureDepartLabel = new Label(
-				MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.heuredepart.label"));
-		heureDepartLabel.setTranslateX(0);
-		heureDepartLabel.setTranslateY(0);
-		this.getChildren().add(heureDepartLabel);
+		mHeureDepartLabel.setTranslateX(-30);
+		mHeureDepartLabel.setTranslateY(0);
+		this.getChildren().add(mHeureDepartLabel);
 
-		Line surface = new Line();
-		surface.setStartX(-30);
-		surface.setStartY(30);
-		surface.setEndX(800);
-		surface.setEndY(30);
-		surface.setStroke(Color.WHITE);
-		surface.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(surface);
+		mHeureDepartValue.setPrefWidth(100);
+		mHeureDepartValue.setMaxWidth(100);
+		mHeureDepartValue.setMinWidth(100);
+		mHeureDepartValue.setTranslateX(5);
+		mHeureDepartValue.setTranslateY(-5);
+		this.getChildren().add(mHeureDepartValue);
 
-		Line surface2 = new Line();
-		surface2.setStartX(-25);
-		surface2.setStartY(35);
-		surface2.setEndX(-10);
-		surface2.setEndY(35);
-		surface2.setStroke(Color.WHITE);
-		surface2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(surface2);
+		mSurface.setStartX(-30);
+		mSurface.setStartY(30);
+		mSurface.setEndX(800);
+		mSurface.setEndY(30);
+		mSurface.setStroke(Color.WHITE);
+		mSurface.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mSurface);
 
-		Line surface3 = new Line();
-		surface3.setStartX(-20);
-		surface3.setStartY(40);
-		surface3.setEndX(-15);
-		surface3.setEndY(40);
-		surface3.setStroke(Color.WHITE);
-		surface3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(surface3);
+		mSurface2.setStartX(-25);
+		mSurface2.setStartY(35);
+		mSurface2.setEndX(-10);
+		mSurface2.setEndY(35);
+		mSurface2.setStroke(Color.WHITE);
+		mSurface2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mSurface2);
 
-		Line surface4 = new Line();
-		surface4.setStartX(780);
-		surface4.setStartY(35);
-		surface4.setEndX(795);
-		surface4.setEndY(35);
-		surface4.setStroke(Color.WHITE);
-		surface4.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(surface4);
+		mSurface3.setStartX(-20);
+		mSurface3.setStartY(40);
+		mSurface3.setEndX(-15);
+		mSurface3.setEndY(40);
+		mSurface3.setStroke(Color.WHITE);
+		mSurface3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mSurface3);
 
-		Line surface5 = new Line();
-		surface5.setStartX(785);
-		surface5.setStartY(40);
-		surface5.setEndX(790);
-		surface5.setEndY(40);
-		surface5.setStroke(Color.WHITE);
-		surface5.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(surface5);
+		mSurface4.setStartX(780);
+		mSurface4.setStartY(35);
+		mSurface4.setEndX(795);
+		mSurface4.setEndY(35);
+		mSurface4.setStroke(Color.WHITE);
+		mSurface4.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mSurface4);
 
-		Line descente = new Line();
-		descente.setStartX(0);
-		descente.setStartY(30);
-		descente.setEndX(10);
-		descente.setEndY(400);
-		descente.setStroke(Color.WHITE);
-		descente.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(descente);
+		mSurface5.setStartX(785);
+		mSurface5.setStartY(40);
+		mSurface5.setEndX(790);
+		mSurface5.setEndY(40);
+		mSurface5.setStroke(Color.WHITE);
+		mSurface5.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mSurface5);
 
-		Line fond = new Line();
-		fond.setStartX(10);
-		fond.setStartY(400);
-		fond.setEndX(550);
-		fond.setEndY(400);
-		fond.setStroke(Color.WHITE);
-		fond.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(fond);
+		mDescente.setStartX(0);
+		mDescente.setStartY(30);
+		mDescente.setEndX(10);
+		mDescente.setEndY(400);
+		mDescente.setStroke(Color.WHITE);
+		mDescente.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mDescente);
 
-		Label profMaxLabel = new Label(
-				MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.profmax.label"));
-		profMaxLabel.setTranslateX((550 - 10) / 2 - 100);
-		profMaxLabel.setTranslateY(370);
-		this.getChildren().add(profMaxLabel);
+		mFond.setStartX(10);
+		mFond.setStartY(400);
+		mFond.setEndX(550);
+		mFond.setEndY(400);
+		mFond.setStroke(Color.WHITE);
+		mFond.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mFond);
 
-		TextField profMaxValue = new TextField("30");
-		profMaxValue.setPrefWidth(45);
-		profMaxValue.setMaxWidth(45);
-		profMaxValue.setMinWidth(45);
-		profMaxValue.setTranslateX((550 - 10) / 2);
-		profMaxValue.setTranslateY(365);
-		this.getChildren().add(profMaxValue);
+		mProfMaxLabel.setTranslateX((550 - 10) / 2 - 100);
+		mProfMaxLabel.setTranslateY(370);
+		this.getChildren().add(mProfMaxLabel);
 
-		Label profMaxUniteLabel = new Label(
-				MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.profmax.unite.label"));
-		profMaxUniteLabel.setTranslateX((550 - 10) / 2 + 50);
-		profMaxUniteLabel.setTranslateY(370);
-		this.getChildren().add(profMaxUniteLabel);
+		mProfMaxValue.setPrefWidth(45);
+		mProfMaxValue.setMaxWidth(45);
+		mProfMaxValue.setMinWidth(45);
+		mProfMaxValue.setTranslateX((550 - 10) / 2);
+		mProfMaxValue.setTranslateY(365);
+		this.getChildren().add(mProfMaxValue);
 
+		mProfMaxUniteLabel.setTranslateX((550 - 10) / 2 + 50);
+		mProfMaxUniteLabel.setTranslateY(370);
+		this.getChildren().add(mProfMaxUniteLabel);
+
+		mHeureSortieLabel.setTranslateX(715);
+		mHeureSortieLabel.setTranslateY(0);
+		this.getChildren().add(mHeureSortieLabel);
+
+		mHeureSortieValue.setPrefWidth(100);
+		mHeureSortieValue.setMaxWidth(100);
+		mHeureSortieValue.setMinWidth(100);
+		mHeureSortieValue.setTranslateX(750);
+		mHeureSortieValue.setTranslateY(-5);
+		this.getChildren().add(mHeureSortieValue);
+
+		mDureePlongeeLabel.setTranslateX((550 - 10) / 2 - 100);
+		mDureePlongeeLabel.setTranslateY(405);
+		this.getChildren().add(mDureePlongeeLabel);
+
+		mDureePlongeeValue.setPrefWidth(45);
+		mDureePlongeeValue.setMaxWidth(45);
+		mDureePlongeeValue.setMinWidth(45);
+		mDureePlongeeValue.setTranslateX((550 - 10) / 2);
+		mDureePlongeeValue.setTranslateY(400);
+		this.getChildren().add(mDureePlongeeValue);
+
+		mDureePlongeeUniteLabel.setTranslateX((550 - 10) / 2 + 50);
+		mDureePlongeeUniteLabel.setTranslateY(405);
+		this.getChildren().add(mDureePlongeeUniteLabel);
+
+		mDebutRemontee.setStartX(550);
+		mDebutRemontee.setStartY(400);
+		mDebutRemontee.setEndX(650);
+		mDebutRemontee.setEndY(80);
+		mDebutRemontee.setStroke(Color.WHITE);
+		mDebutRemontee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mDebutRemontee);
+
+		mPalier3m.setStartX(650);
+		mPalier3m.setStartY(80);
+		mPalier3m.setEndX(750);
+		mPalier3m.setEndY(80);
+		mPalier3m.setStroke(Color.WHITE);
+		mPalier3m.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mPalier3m);
+
+		mPalier3mLabel.setTranslateX(680);
+		mPalier3mLabel.setTranslateY(50);
+		this.getChildren().add(mPalier3mLabel);
+
+		mDureePalier3mValue.setPrefWidth(50);
+		mDureePalier3mValue.setMaxWidth(50);
+		mDureePalier3mValue.setMinWidth(50);
+		mDureePalier3mValue.setTranslateX(665);
+		mDureePalier3mValue.setTranslateY(80);
+		this.getChildren().add(mDureePalier3mValue);
+
+		mDureePalier3mUniteLabel.setTranslateX(705);
+		mDureePalier3mUniteLabel.setTranslateY(80);
+		this.getChildren().add(mDureePalier3mUniteLabel);
+
+		mRemonteeFin.setStartX(750);
+		mRemonteeFin.setStartY(80);
+		mRemonteeFin.setEndX(770);
+		mRemonteeFin.setEndY(30);
+		mRemonteeFin.setStroke(Color.WHITE);
+		mRemonteeFin.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
+		this.getChildren().add(mRemonteeFin);
+
+		mDTRLabel.setTranslateX(640);
+		mDTRLabel.setTranslateY(405);
+		this.getChildren().add(mDTRLabel);
+
+		mDTRValue.setPrefWidth(50);
+		mDTRValue.setMaxWidth(50);
+		mDTRValue.setMinWidth(50);
+		mDTRValue.setTranslateX(680);
+		mDTRValue.setTranslateY(400);
+		this.getChildren().add(mDTRValue);
+
+		mDTRUniteLabel.setTranslateX(725);
+		mDTRUniteLabel.setTranslateY(405);
+		this.getChildren().add(mDTRUniteLabel);
+
+		MN90.getLogger().debug(this, "Création des marqueurs de durée dans la vue PlongeeSimple");
+
+		mMarkDebut.setStartX(0);
+		mMarkDebut.setStartY(30);
+		mMarkDebut.setEndX(0);
+		mMarkDebut.setEndY(450);
+		mMarkDebut.setStroke(Color.WHITE);
+		mMarkDebut.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mMarkDebut);
+
+		mFlecheDureePlongee.setStartX(0);
+		mFlecheDureePlongee.setStartY(440);
+		mFlecheDureePlongee.setEndX(550);
+		mFlecheDureePlongee.setEndY(440);
+		mFlecheDureePlongee.setStroke(Color.WHITE);
+		mFlecheDureePlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDureePlongee);
+
+		mFlecheDureePlongee2.setStartX(0);
+		mFlecheDureePlongee2.setStartY(440);
+		mFlecheDureePlongee2.setEndX(5);
+		mFlecheDureePlongee2.setEndY(445);
+		mFlecheDureePlongee2.setStroke(Color.WHITE);
+		mFlecheDureePlongee2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDureePlongee2);
+
+		mFlecheDureePlongee3.setStartX(0);
+		mFlecheDureePlongee3.setStartY(440);
+		mFlecheDureePlongee3.setEndX(5);
+		mFlecheDureePlongee3.setEndY(435);
+		mFlecheDureePlongee3.setStroke(Color.WHITE);
+		mFlecheDureePlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDureePlongee3);
+
+		mFlecheDureePlongee4.setStartX(555);
+		mFlecheDureePlongee4.setStartY(435);
+		mFlecheDureePlongee4.setEndX(545);
+		mFlecheDureePlongee4.setEndY(445);
+		mFlecheDureePlongee4.setStroke(Color.WHITE);
+		mFlecheDureePlongee4.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDureePlongee4);
+
+		mFlecheDureePlongee5.setStartX(555);
+		mFlecheDureePlongee5.setStartY(445);
+		mFlecheDureePlongee5.setEndX(545);
+		mFlecheDureePlongee5.setEndY(435);
+		mFlecheDureePlongee5.setStroke(Color.WHITE);
+		mFlecheDureePlongee5.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDureePlongee5);
+
+		mMarkDureePlongee.setStartX(550);
+		mMarkDureePlongee.setStartY(30);
+		mMarkDureePlongee.setEndX(550);
+		mMarkDureePlongee.setEndY(450);
+		mMarkDureePlongee.setStroke(Color.WHITE);
+		mMarkDureePlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mMarkDureePlongee);
+
+		mMarkFinPlongee.setStartX(770);
+		mMarkFinPlongee.setStartY(30);
+		mMarkFinPlongee.setEndX(770);
+		mMarkFinPlongee.setEndY(450);
+		mMarkFinPlongee.setStroke(Color.WHITE);
+		mMarkFinPlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mMarkFinPlongee);
+
+		mFlecheDTRPlongee.setStartX(550);
+		mFlecheDTRPlongee.setStartY(440);
+		mFlecheDTRPlongee.setEndX(770);
+		mFlecheDTRPlongee.setEndY(440);
+		mFlecheDTRPlongee.setStroke(Color.WHITE);
+		mFlecheDTRPlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDTRPlongee);
+
+		mFlecheDTRPlongee2.setStartX(770);
+		mFlecheDTRPlongee2.setStartY(440);
+		mFlecheDTRPlongee2.setEndX(765);
+		mFlecheDTRPlongee2.setEndY(445);
+		mFlecheDTRPlongee2.setStroke(Color.WHITE);
+		mFlecheDTRPlongee2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDTRPlongee2);
+
+		mFlecheDTRPlongee3.setStartX(770);
+		mFlecheDTRPlongee3.setStartY(440);
+		mFlecheDTRPlongee3.setEndX(765);
+		mFlecheDTRPlongee3.setEndY(435);
+		mFlecheDTRPlongee3.setStroke(Color.WHITE);
+		mFlecheDTRPlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
+		this.getChildren().add(mFlecheDTRPlongee3);
 	}
 }
