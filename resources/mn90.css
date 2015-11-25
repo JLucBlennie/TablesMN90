@@ -44,6 +44,7 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Comic sans MS";
 	-fx-font-weight: bold;
+	-fx-background-color: transparent;
 	-fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.7), 5, 0, 0, 1);  
 }
 
