@@ -4,17 +4,21 @@ import java.util.List;
 
 import com.jlb.plongee.datamodel.table.mn90.TablePlongee;
 import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
+import com.jlb.tools.metamodel.Entity;
+import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
+import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
 
-public class Plongeur {
+public class Plongeur extends Entity {
 
 	private List<Compartiment> mCompartiments;
 	private List<Plongee> mPlongees;
 	private TablePlongee mTable;
-	private String mNom;
 
-	public void Plongeur(String nom) {
-		mNom = nom;
-
+	public Plongeur(int id, String nom) {
+		StringAttribute attrName = new StringAttribute("Nom", nom);
+		mAttributes.add(attrName);
+		IntegerAttribute attrId = new IntegerAttribute("ID", id);
+		mAttributes.add(attrId);
 		// Initialisation des compartiments
 	}
 

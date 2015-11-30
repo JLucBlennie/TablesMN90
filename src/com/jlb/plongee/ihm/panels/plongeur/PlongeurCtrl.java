@@ -1,11 +1,11 @@
 package com.jlb.plongee.ihm.panels.plongeur;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.ihm.Controller;
+import com.jlb.plongee.ihm.IController;
 import com.jlb.plongee.ihm.panels.plongees.PlongeesCtrl;
 import com.jlb.plongee.ihm.panels.plongeur.exercices.ExercicesCtrl;
 
-public class PlongeurCtrl implements Controller<PlongeurView> {
+public class PlongeurCtrl implements IController<PlongeurView> {
 
 	private ExercicesCtrl mExercicesCtrl = new ExercicesCtrl();
 	private PlongeesCtrl mPlongeesCtrl = new PlongeesCtrl();

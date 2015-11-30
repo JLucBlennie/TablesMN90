@@ -1,9 +1,9 @@
 package com.jlb.plongee.ihm.panels.compartiments;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.ihm.Controller;
+import com.jlb.plongee.ihm.IController;
 
-public class CompartimentCtrl implements Controller<CompartimentView> {
+public class CompartimentCtrl implements IController<CompartimentView> {
 
 	CompartimentView mView;
 

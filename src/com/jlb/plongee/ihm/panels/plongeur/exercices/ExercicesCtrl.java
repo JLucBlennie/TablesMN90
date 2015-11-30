@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.ihm.Controller;
+import com.jlb.plongee.ihm.IController;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ExercicesCtrl implements Controller<ExercicesView> {
+public class ExercicesCtrl implements IController<ExercicesView> {
 
 	private ExercicesView mView;
 

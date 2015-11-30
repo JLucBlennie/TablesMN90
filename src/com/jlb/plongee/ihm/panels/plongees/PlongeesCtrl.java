@@ -1,9 +1,9 @@
 package com.jlb.plongee.ihm.panels.plongees;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.ihm.Controller;
+import com.jlb.plongee.ihm.IController;
 
-public class PlongeesCtrl implements Controller<PlongeesView> {
+public class PlongeesCtrl implements IController<PlongeesView> {
 
 	private PlongeesView mView = new PlongeesView();
 
