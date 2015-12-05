@@ -7,13 +7,13 @@ import com.jlb.tools.metamodel.criterion.ICriterion;
 
 public interface IDatabaseServices {
 
-	public void createDatabase();
+	public void createDatabase(Entity description);
 
-	public void storeObjects(List<? extends Entity> objects);
+	public void storeObjects(List<Entity> objects);
 
-	public List<? extends Entity> requestObjects(ICriterion criterion);
+	public List<Entity> requestObjects(ICriterion criterion);
 
-	public void deleteObjects(List<? extends Entity> objects);
+	public void deleteObjects(List<Entity> objects);
 
 	public void endService();
 }

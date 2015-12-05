@@ -39,19 +39,20 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 	}
 
 	@Override
-	public void createDatabase() {
+	public void createDatabase(Entity description) {
 		try {
-			List<Entity> objects = new ArrayList<Entity>();
-			objects.add(new Plongeur(1, "Moi"));
-			for (Entity obj : objects) {
-				String attributes = "";
-				for (int i = 0; i < obj.getAttributes().size(); i++) {
-					IAttribute attr = obj.getAttributes().get(i);
-					attributes += attr.getName() + " " + attr.getType().toLowerCase()
-							+ ((i < obj.getAttributes().size() - 1) ? "," : "");
-				}
-				mStatement.execute("drop table if exists " + obj.getClass().getSimpleName());
-				mStatement.executeUpdate("create table " + obj.getClass().getSimpleName() + " (" + attributes + ")");
+			String attributes = "";
+			for (int i = 0; i < description.getAttributes().size(); i++) {
+				IAttribute attr = description.getAttributes().get(i);
+				attributes += attr.getName() + " " + attr.getType().toLowerCase()
+						+ ((i < description.getAttributes().size() - 1) ? "," : "");
+			}
+			mStatement.execute("drop table if exists " + description.getClass().getSimpleName());
+			mStatement.executeUpdate("create table " + description.getClass().getSimpleName()
+					+ " (Id integer,idParent integer,typeParent string,nbFils integer," + attributes + ")");
+			// On s'occupe des fils
+			for (Entity child : description.getChildren()) {
+				createDatabase(child);
 			}
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);
@@ -60,7 +61,7 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 	}
 
 	@Override
-	public void storeObjects(List<? extends Entity> objects) {
+	public void storeObjects(List<Entity> objects) {
 		try {
 			for (Entity obj : objects) {
 				String attributes = "";
@@ -68,8 +69,12 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 					IAttribute attr = obj.getAttributes().get(i);
 					attributes += "'" + attr.getValue() + "'" + ((i < obj.getAttributes().size() - 1) ? "," : "");
 				}
-				mStatement
-						.executeUpdate("insert into " + obj.getClass().getSimpleName() + " values(" + attributes + ")");
+				mStatement.executeUpdate("insert into " + obj.getClass().getSimpleName() + " values('" + obj.getId()
+						+ "','" + (obj.getParent() != null ? obj.getParent().getId() : -1) + "','"
+						+ (obj.getParent() != null ? obj.getParent().getClass().getSimpleName() : "") + "','"
+						+ obj.getChildren().size() + "'," + attributes + ")");
+				// On s'occupe des fils
+				storeObjects(obj.getChildren());
 			}
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);
@@ -77,7 +82,7 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 	}
 
 	@Override
-	public List<? extends Entity> requestObjects(ICriterion criterion) {
+	public List<Entity> requestObjects(ICriterion criterion) {
 		List<Entity> result = new ArrayList<Entity>();
 		ResultSet rs;
 		try {
@@ -91,9 +96,11 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 			while (rs.next()) {
 				// read the result set
 				// TODO : Voir comment retrouver la classe a partir du TableName
+				// et la recuperation des fils
 				Plongeur plongeur = new Plongeur(rs.getInt("Id"), rs.getString("Nom"));
+
 				result.add(plongeur);
-				MN90.getLogger().debug(this, "Plongeur(" + rs.getInt("Id") + ") " + rs.getString("Nom"));
+				MN90.getLogger().debug(this, plongeur.toString());
 			}
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);
@@ -102,7 +109,7 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 	}
 
 	@Override
-	public void deleteObjects(List<? extends Entity> objects) {
+	public void deleteObjects(List<Entity> objects) {
 		try {
 			for (Entity obj : objects) {
 				String attributes = "";
@@ -112,6 +119,7 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 							+ ((i < obj.getAttributes().size() - 1) ? " and " : "");
 				}
 				mStatement.executeUpdate("delete from " + obj.getClass().getSimpleName() + " where " + attributes);
+				// TODO : Gerer la suppression des fils
 			}
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);
