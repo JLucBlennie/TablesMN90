@@ -17,15 +17,15 @@ public class DatabaseTests {
 
 	@Test
 	public void testDatabase() {
-		DatabaseServiceSQLite mService = new DatabaseServiceSQLite("database/mn90");
+		DatabaseServiceSQLite mService = new DatabaseServiceSQLite("database/mn90.db");
 		Plongeur plongeur = new Plongeur(0, "Moi");
-		plongeur.ajouterPlongee(new Plongee(0, 30, 15));
+		plongeur.ajouterPlongee(new Plongee(0, "Plongee 1", 30, 15));
 		mService.createDatabase(plongeur);
 		List<Entity> objects = new ArrayList<Entity>();
 		objects.add(plongeur);
 		Plongeur plongeur2 = new Plongeur(2, "Toi");
-		plongeur2.ajouterPlongee(new Plongee(1, 45, 10));
-		plongeur2.ajouterPlongee(new Plongee(2, 65, 10));
+		plongeur2.ajouterPlongee(new Plongee(1, "Plongee 2", 45, 10));
+		plongeur2.ajouterPlongee(new Plongee(2, "Plongee 3", 65, 10));
 		objects.add(plongeur2);
 		mService.storeObjects(objects);
 		List<Entity> list = mService

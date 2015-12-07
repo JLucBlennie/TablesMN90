@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jlb.plongee.application.MN90;
+import com.jlb.plongee.datamodel.Plongee;
 import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.tools.database.IDatabaseServices;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.IAttribute;
+import com.jlb.tools.metamodel.criterion.E_OPERATOR;
 import com.jlb.tools.metamodel.criterion.ICriterion;
+import com.jlb.tools.metamodel.criterion.impl.IntegerCriterion;
 
 public class DatabaseServiceSQLite implements IDatabaseServices {
 
@@ -29,7 +32,7 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 
 		try {
 			// create a database connection
-			mConnection = DriverManager.getConnection("jdbc:sqlite:" + databasePath + ".db");
+			mConnection = DriverManager.getConnection("jdbc:sqlite:" + databasePath);
 			mStatement = mConnection.createStatement();
 			mStatement.setQueryTimeout(30); // set timeout to 30 sec.
 
@@ -95,14 +98,31 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 			}
 			while (rs.next()) {
 				// read the result set
-				// TODO : Voir comment retrouver la classe a partir du TableName
-				// et la recuperation des fils
-				Plongeur plongeur = new Plongeur(rs.getInt("Id"), rs.getString("Nom"));
+				Class<Entity> tableClass = (Class<Entity>) Class
+						.forName(MN90.DATAMODEL_PACKAGE_NAME + "." + criterion.getTableName());
+				Entity entity = null;
+				if (tableClass.getSimpleName().equals(Plongeur.class.getSimpleName())) {
+					entity = new Plongeur(rs.getInt("Id"), rs.getString(Plongeur.ATTRIBUTE_NAME));
+				} else if (tableClass.getSimpleName().equals(Plongee.class.getSimpleName())) {
+					entity = new Plongee(rs.getInt("Id"), rs.getString(Plongee.ATTRIBUTE_NAME),
+							rs.getInt(Plongee.ATTRIBUTE_PROFONDEUR), rs.getInt(Plongee.ATTRIBUTE_TEMPS_PLONGEES));
+				}
 
-				result.add(plongeur);
-				MN90.getLogger().debug(this, plongeur.toString());
+				result.add(entity);
+				MN90.getLogger().debug(this, entity.toString());
+				// On doit s'occuper des fils
+				if (rs.getInt("nbFils") > 0) {
+					for (Class childClass : entity.getAuthorizedChildrenClass()) {
+						ICriterion<Integer> childrenIdCriterion = new IntegerCriterion(childClass.getSimpleName(),
+								"idParent", E_OPERATOR.EQUALS, entity.getId());
+						for (Entity ent : requestObjects(childrenIdCriterion)) {
+							ent.setParent(entity);
+							entity.getChildren().add(ent);
+						}
+					}
+				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | ClassNotFoundException | SecurityException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);
 		}
 		return result;
@@ -119,7 +139,14 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 							+ ((i < obj.getAttributes().size() - 1) ? " and " : "");
 				}
 				mStatement.executeUpdate("delete from " + obj.getClass().getSimpleName() + " where " + attributes);
-				// TODO : Gerer la suppression des fils
+				// On doit s'occuper des fils
+				if (obj.getChildren().size() > 0) {
+					for (Class childClass : obj.getAuthorizedChildrenClass()) {
+						ICriterion<Integer> childrenIdCriterion = new IntegerCriterion(childClass.getSimpleName(),
+								"idParent", E_OPERATOR.EQUALS, obj.getId());
+						deleteObjects(requestObjects(childrenIdCriterion));
+					}
+				}
 			}
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, e.getMessage(), e);

@@ -3,12 +3,18 @@
  */
 package com.jlb.plongee.application;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.ihm.panels.MN90Ctrl;
+import com.jlb.tools.database.impl.DatabaseServiceSQLite;
 import com.jlb.tools.logging.ILogger;
 import com.jlb.tools.logging.LoggerFactory;
+import com.jlb.tools.metamodel.Entity;
+import com.jlb.tools.metamodel.criterion.ICriterion;
+import com.jlb.tools.metamodel.criterion.impl.AllCriterion;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -33,6 +39,8 @@ public class MN90 extends Application {
 	public static final boolean AFFICHAGE_GRILLE = TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.affichage.grille")
 			.equalsIgnoreCase("true") ? true : false;
 
+	public static final String DATAMODEL_PACKAGE_NAME = "com.jlb.plongee.datamodel";
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -43,9 +51,18 @@ public class MN90 extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		// Récupération des donnees de la base de donnees
+		mLogger.debug(this, "Récupération des données de MN90 => "
+				+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
+		DatabaseServiceSQLite dbService = new DatabaseServiceSQLite(
+				TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
+
+		ICriterion<Entity> plongeursCriterion = new AllCriterion(Plongeur.class.getSimpleName());
+		List<Entity> plongeurs = dbService.requestObjects(plongeursCriterion);
+
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		mLogger.debug(this, "Création du Controleur de MN90");
-		MN90Ctrl tablesMN90Ctrl = new MN90Ctrl();
+		MN90Ctrl tablesMN90Ctrl = new MN90Ctrl(plongeurs);
 
 		mLogger.debug(this, "Création de la Scene JavaFx à partir de la vue principale");
 		Scene scene = new Scene(tablesMN90Ctrl.getView(), 1400, 800, Color.TRANSPARENT);

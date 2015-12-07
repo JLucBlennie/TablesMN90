@@ -31,6 +31,9 @@ public class Plongeur extends Entity {
 		} catch (IOException e) {
 			MN90.getLogger().error(Plongeur.class, "Probleme durant la lecture du fichier " + COMPARTIMENT_FILENAME, e);
 		}
+
+		// Definition des type de fils
+		mAuthorizedChildrenClass.add(Plongee.class);
 	}
 
 	public Plongeur(int id, String nom) {

@@ -9,8 +9,13 @@ public abstract class Entity {
 
 	protected List<IAttribute> mAttributes = new ArrayList<IAttribute>();
 	protected List<Entity> mChildren = new ArrayList<>();
+	protected static List<Class> mAuthorizedChildrenClass = new ArrayList<Class>();
 	protected Entity mParent;
 	protected int mId;
+
+	public static List<Class> getAuthorizedChildrenClass() {
+		return mAuthorizedChildrenClass;
+	}
 
 	public void setParent(Entity parent) {
 		this.mParent = parent;

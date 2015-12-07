@@ -35,4 +35,8 @@ public class PlongeurView extends GridPane {
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 
 	}
+
+	public TextField getPlongeurNameText() {
+		return mPlongeurName;
+	}
 }
