@@ -5,8 +5,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.jlb.plongee.datamodel.Plongee;
 import com.jlb.plongee.datamodel.Plongeur;
+import com.jlb.plongee.datamodel.exercices.Exercice;
+import com.jlb.plongee.datamodel.exercices.E_TYPE_EXERCICE;
 import com.jlb.tools.database.impl.DatabaseServiceSQLite;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.criterion.E_OPERATOR;
@@ -19,13 +20,13 @@ public class DatabaseTests {
 	public void testDatabase() {
 		DatabaseServiceSQLite mService = new DatabaseServiceSQLite("database/mn90.db");
 		Plongeur plongeur = new Plongeur(0, "Moi");
-		plongeur.ajouterPlongee(new Plongee(0, "Plongee 1", 30, 15));
+		plongeur.ajouterExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE));
 		mService.createDatabase(plongeur);
 		List<Entity> objects = new ArrayList<Entity>();
 		objects.add(plongeur);
 		Plongeur plongeur2 = new Plongeur(2, "Toi");
-		plongeur2.ajouterPlongee(new Plongee(1, "Plongee 2", 45, 10));
-		plongeur2.ajouterPlongee(new Plongee(2, "Plongee 3", 65, 10));
+		plongeur2.ajouterExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur2.ajouterExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
 		objects.add(plongeur2);
 		mService.storeObjects(objects);
 		List<Entity> list = mService

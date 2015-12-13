@@ -1,7 +1,7 @@
 package com.jlb.plongee.ihm.panels.plongeur.exercices;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.datamodel.Plongee;
+import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.ihm.MN90Constants;
 
 import javafx.geometry.Insets;

@@ -6,11 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jlb.plongee.application.MN90;
+import com.jlb.plongee.datamodel.exercices.Exercice;
+import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
 import com.jlb.tools.csv.CSVReader;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
 
+/**
+ * Classe decrivant un plongeur. Un plongeur a un carnet de plongees et aussi
+ * des Exercices de Table de plongees
+ * 
+ * @author JLuc
+ *
+ */
 public class Plongeur extends Entity {
 
 	public static final String ATTRIBUTE_NAME = "Nom";
@@ -33,13 +42,17 @@ public class Plongeur extends Entity {
 		}
 
 		// Definition des type de fils
-		mAuthorizedChildrenClass.add(Plongee.class);
+		mAuthorizedChildrenClass.add(Exercice.class);
+		mAuthorizedChildrenClass.add(LogBook.class);
 	}
 
 	public Plongeur(int id, String nom) {
 		this.mId = id;
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, nom);
 		mAttributes.add(attrName);
+
+		// Ajout d'un seul carnet de plongees
+		mChildren.add(new LogBook(0));
 	}
 
 	public void plonge(int i) throws PalierNonTrouveException {
@@ -48,22 +61,22 @@ public class Plongeur extends Entity {
 		plongee.plonge();
 	}
 
-	public void ajouterPlongee(Plongee plongee) {
-		if (!mChildren.contains(plongee)) {
-			plongee.setParent(this);
-			mChildren.add(plongee);
+	public void ajouterExercice(Exercice exercice) {
+		if (!mChildren.contains(exercice)) {
+			exercice.setParent(this);
+			mChildren.add(exercice);
 		}
 	}
 
-	public void supprimerPlongee(Plongee plongee) {
-		if (mChildren.contains(plongee)) {
-			mChildren.remove(plongee);
+	public void supprimerExercice(Exercice exercice) {
+		if (mChildren.contains(exercice)) {
+			mChildren.remove(exercice);
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "Plongeur (" + this.mId + ") " + this.getAttribute(ATTRIBUTE_NAME).getValue() + " - nb Plongees "
-				+ getChildrenOfType(Plongee.class.getName()).size();
+		return "Plongeur (" + this.mId + ") " + this.getAttribute(ATTRIBUTE_NAME).getValue() + " - nb Exercices "
+				+ getChildrenOfType(Exercice.class.getName()).size();
 	}
 }

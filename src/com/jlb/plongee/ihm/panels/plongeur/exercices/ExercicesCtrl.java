@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.datamodel.Plongee;
 import com.jlb.plongee.datamodel.Plongeur;
+import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.ihm.IController;
 import com.jlb.tools.metamodel.Entity;
 

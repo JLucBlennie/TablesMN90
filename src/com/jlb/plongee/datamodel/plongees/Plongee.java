@@ -1,4 +1,4 @@
-package com.jlb.plongee.datamodel;
+package com.jlb.plongee.datamodel.plongees;
 
 import com.jlb.plongee.datamodel.table.mn90.TablePlongee;
 import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
@@ -6,7 +6,7 @@ import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
 
-public class Plongee extends Entity {
+public abstract class Plongee extends Entity {
 
 	public static final String ATTRIBUTE_NAME = "Nom";
 	public static final String ATTRIBUTE_PROFONDEUR = "profondeur";

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.datamodel.Plongee;
 import com.jlb.plongee.datamodel.Plongeur;
+import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.tools.database.IDatabaseServices;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.IAttribute;
@@ -101,11 +101,15 @@ public class DatabaseServiceSQLite implements IDatabaseServices {
 				Class<Entity> tableClass = (Class<Entity>) Class
 						.forName(MN90.DATAMODEL_PACKAGE_NAME + "." + criterion.getTableName());
 				Entity entity = null;
+				// TODO : Remettre en place la création des objets à partir des
+				// requètes.
 				if (tableClass.getSimpleName().equals(Plongeur.class.getSimpleName())) {
 					entity = new Plongeur(rs.getInt("Id"), rs.getString(Plongeur.ATTRIBUTE_NAME));
-				} else if (tableClass.getSimpleName().equals(Plongee.class.getSimpleName())) {
-					entity = new Plongee(rs.getInt("Id"), rs.getString(Plongee.ATTRIBUTE_NAME),
-							rs.getInt(Plongee.ATTRIBUTE_PROFONDEUR), rs.getInt(Plongee.ATTRIBUTE_TEMPS_PLONGEES));
+				} else if (tableClass.getSimpleName().equals(Exercice.class.getSimpleName())) {
+					// entity = new Exercice(rs.getInt("Id"),
+					// rs.getString(Plongee.ATTRIBUTE_NAME),
+					// rs.getInt(Plongee.ATTRIBUTE_PROFONDEUR),
+					// rs.getInt(Plongee.ATTRIBUTE_TEMPS_PLONGEES));
 				}
 
 				result.add(entity);
