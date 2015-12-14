@@ -1,13 +1,13 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
-public enum E_TYPE_THEME {
+public enum E_TYPE_LIEU {
 
-	EXERCICE(0, "Exercice"), EXPLORATION(1, "Exploration"), ORIENTATION(2, "Orientation");
+	MER(0, "Mer"), CARRIERE(1, "Carrière"), LAC(2, "Lac");
 
 	private int mIndex;
 	private String mName;
 
-	E_TYPE_THEME(int index, String name) {
+	E_TYPE_LIEU(int index, String name) {
 		this.mIndex = index;
 		this.mName = name;
 	}

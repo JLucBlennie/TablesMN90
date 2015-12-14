@@ -20,13 +20,13 @@ public class DatabaseTests {
 	public void testDatabase() {
 		DatabaseServiceSQLite mService = new DatabaseServiceSQLite("database/mn90.db");
 		Plongeur plongeur = new Plongeur(0, "Moi");
-		plongeur.ajouterExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur.addExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE));
 		mService.createDatabase(plongeur);
 		List<Entity> objects = new ArrayList<Entity>();
 		objects.add(plongeur);
 		Plongeur plongeur2 = new Plongeur(2, "Toi");
-		plongeur2.ajouterExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
-		plongeur2.ajouterExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur2.addExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur2.addExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
 		objects.add(plongeur2);
 		mService.storeObjects(objects);
 		List<Entity> list = mService

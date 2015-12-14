@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.exercices.Exercice;
+import com.jlb.plongee.datamodel.logbook.LogBook;
+import com.jlb.plongee.datamodel.logbook.PlongeeLogBook;
 import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
 import com.jlb.tools.csv.CSVReader;
@@ -61,17 +63,27 @@ public class Plongeur extends Entity {
 		plongee.plonge();
 	}
 
-	public void ajouterExercice(Exercice exercice) {
+	public void addExercice(Exercice exercice) {
 		if (!mChildren.contains(exercice)) {
 			exercice.setParent(this);
 			mChildren.add(exercice);
 		}
 	}
 
-	public void supprimerExercice(Exercice exercice) {
+	public void removeExercice(Exercice exercice) {
 		if (mChildren.contains(exercice)) {
 			mChildren.remove(exercice);
 		}
+	}
+
+	public void addPlongeeToLogbook(PlongeeLogBook plongee) {
+		LogBook logbook = (LogBook) getChildOfType(LogBook.class.getName(), 0);
+		logbook.addPlongee(plongee);
+	}
+
+	public void removePlongeeFromLogbook(PlongeeLogBook plongee) {
+		LogBook logbook = (LogBook) getChildOfType(LogBook.class.getName(), 0);
+		logbook.removePlongee(plongee);
 	}
 
 	@Override

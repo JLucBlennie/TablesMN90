@@ -1,6 +1,5 @@
 package com.jlb.plongee.datamodel.exercices;
 
-import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -18,7 +17,7 @@ public class Exercice extends Entity {
 
 	static {
 		// Definition des type de fils
-		mAuthorizedChildrenClass.add(Plongee.class);
+		mAuthorizedChildrenClass.add(PlongeeExercice.class);
 	}
 
 	public Exercice(int id, String nom, E_TYPE_EXERCICE type) {
@@ -29,5 +28,4 @@ public class Exercice extends Entity {
 		IntegerAttribute attrType = new IntegerAttribute(ATTRIBUTE_TYPE, type.getIndex());
 		mAttributes.add(attrType);
 	}
-
 }

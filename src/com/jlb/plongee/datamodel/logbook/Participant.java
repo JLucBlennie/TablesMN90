@@ -1,4 +1,4 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;

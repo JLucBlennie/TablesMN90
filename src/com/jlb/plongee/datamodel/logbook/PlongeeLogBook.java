@@ -1,7 +1,8 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
 import java.util.List;
 
+import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
