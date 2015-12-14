@@ -1,4 +1,4 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
 public enum E_NIVEAU {
 

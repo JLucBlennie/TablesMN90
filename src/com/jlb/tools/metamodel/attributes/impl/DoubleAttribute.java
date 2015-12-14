@@ -2,31 +2,31 @@ package com.jlb.tools.metamodel.attributes.impl;
 
 import com.jlb.tools.metamodel.attributes.IAttribute;
 
-public class IntegerAttribute implements IAttribute<Integer> {
+public class DoubleAttribute implements IAttribute<Double> {
 
 	private String mName;
-	private int mValue;
+	private double mValue;
 	private String mUnit;
 
-	public IntegerAttribute(String name) {
+	public DoubleAttribute(String name) {
 		mName = name;
-		mValue = -1;
+		mValue = -1.0;
 		mUnit = "";
 	}
 
-	public IntegerAttribute(String name, String unit) {
+	public DoubleAttribute(String name, String unit) {
 		mName = name;
-		mValue = -1;
+		mValue = -1.0;
 		mUnit = unit;
 	}
 
-	public IntegerAttribute(String name, int value) {
+	public DoubleAttribute(String name, double value) {
 		mName = name;
 		mValue = value;
 		mUnit = "";
 	}
 
-	public IntegerAttribute(String name, int value, String unit) {
+	public DoubleAttribute(String name, double value, String unit) {
 		mName = name;
 		mValue = value;
 		mUnit = unit;
@@ -38,12 +38,12 @@ public class IntegerAttribute implements IAttribute<Integer> {
 	}
 
 	@Override
-	public Integer getValue() {
+	public Double getValue() {
 		return mValue;
 	}
 
 	@Override
-	public void setValue(Integer value) {
+	public void setValue(Double value) {
 		mValue = value;
 	}
 
@@ -54,11 +54,11 @@ public class IntegerAttribute implements IAttribute<Integer> {
 
 	@Override
 	public String getType() {
-		return "integer";
+		return "double";
 	}
 
 	@Override
 	public String toString() {
-		return "Attribut (Integer) " + mName + " = " + mValue + (mUnit.isEmpty() ? "" : " " + mUnit);
+		return "Attribut (Double) " + mName + " = " + mValue + (mUnit.isEmpty() ? "" : " " + mUnit);
 	}
 }

@@ -2,19 +2,36 @@ package com.jlb.tools.metamodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
+import com.jlb.plongee.application.MN90;
 import com.jlb.tools.metamodel.attributes.IAttribute;
 
 public abstract class Entity {
 
+	protected static final ResourceBundle DICO_PROPERTIES = ResourceBundle.getBundle("resources/dico",
+			Locale.getDefault());
+
+	protected String mTableName;
+	protected List<Class> mAuthorizedChildrenClass = new ArrayList<Class>();
+
 	protected List<IAttribute> mAttributes = new ArrayList<IAttribute>();
-	protected List<Entity> mChildren = new ArrayList<>();
-	protected static List<Class> mAuthorizedChildrenClass = new ArrayList<Class>();
+	protected List<Entity> mChildren = new ArrayList<Entity>();
+	protected List<Link> mLinks = new ArrayList<Link>();
 	protected Entity mParent;
 	protected int mId;
 
-	public static List<Class> getAuthorizedChildrenClass() {
+	public Entity() {
+		mTableName = this.getClass().getSimpleName();
+	}
+
+	public List<Class> getAuthorizedChildrenClass() {
 		return mAuthorizedChildrenClass;
+	}
+
+	public String getTableName() {
+		return mTableName;
 	}
 
 	public void setParent(Entity parent) {
@@ -64,5 +81,34 @@ public abstract class Entity {
 
 	public List<Entity> getChildren() {
 		return mChildren;
+	}
+
+	private Link getLink(Entity dest) {
+		Link lnk = null;
+
+		for (Link l : mLinks) {
+			if (l.getSource().equals(dest)) {
+				lnk = l;
+				break;
+			}
+		}
+
+		return lnk;
+	}
+
+	public List<Link> getLinks() {
+		return mLinks;
+	}
+
+	public void removeLink(Entity dest) {
+		mLinks.remove(getLink(dest));
+	}
+
+	public void addLink(Entity dest) {
+		if (getLink(dest) == null) {
+			mLinks.add(new Link(this, dest));
+		} else {
+			MN90.getLogger().info(this, "Le lien vers " + dest + " existe deja...");
+		}
 	}
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.exercices.Exercice;
+import com.jlb.plongee.datamodel.logbook.LogBook;
+import com.jlb.plongee.datamodel.logbook.PlongeeLogBook;
 import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
 import com.jlb.tools.csv.CSVReader;
@@ -22,7 +24,7 @@ import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
  */
 public class Plongeur extends Entity {
 
-	public static final String ATTRIBUTE_NAME = "Nom";
+	public static final String ATTRIBUTE_NAME = DICO_PROPERTIES.getString("datamodel.plongeur.attribut.name");
 
 	private static final String COMPARTIMENT_FILENAME = "resources/mn90/compartiments.mn90";
 	private static List<Compartiment> mCompartiments = new ArrayList<Compartiment>();
@@ -40,19 +42,33 @@ public class Plongeur extends Entity {
 		} catch (IOException e) {
 			MN90.getLogger().error(Plongeur.class, "Probleme durant la lecture du fichier " + COMPARTIMENT_FILENAME, e);
 		}
+	}
 
+	public Plongeur() {
+		super();
 		// Definition des type de fils
 		mAuthorizedChildrenClass.add(Exercice.class);
 		mAuthorizedChildrenClass.add(LogBook.class);
+
+		// Definition des Attributs
+		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME);
+		mAttributes.add(attrName);
 	}
 
 	public Plongeur(int id, String nom) {
 		this.mId = id;
+		// Definition des type de fils
+		mAuthorizedChildrenClass.add(Exercice.class);
+		mAuthorizedChildrenClass.add(LogBook.class);
+
+		// Definition des Attributs
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, nom);
 		mAttributes.add(attrName);
 
 		// Ajout d'un seul carnet de plongees
-		mChildren.add(new LogBook(0));
+		LogBook logBook = new LogBook(this.mId);
+		logBook.setParent(this);
+		mChildren.add(logBook);
 	}
 
 	public void plonge(int i) throws PalierNonTrouveException {
@@ -61,17 +77,27 @@ public class Plongeur extends Entity {
 		plongee.plonge();
 	}
 
-	public void ajouterExercice(Exercice exercice) {
+	public void addExercice(Exercice exercice) {
 		if (!mChildren.contains(exercice)) {
 			exercice.setParent(this);
 			mChildren.add(exercice);
 		}
 	}
 
-	public void supprimerExercice(Exercice exercice) {
+	public void removeExercice(Exercice exercice) {
 		if (mChildren.contains(exercice)) {
 			mChildren.remove(exercice);
 		}
+	}
+
+	public void addPlongeeToLogbook(PlongeeLogBook plongee) {
+		LogBook logbook = (LogBook) getChildOfType(LogBook.class.getName(), 0);
+		logbook.addPlongee(plongee);
+	}
+
+	public void removePlongeeFromLogbook(PlongeeLogBook plongee) {
+		LogBook logbook = (LogBook) getChildOfType(LogBook.class.getName(), 0);
+		logbook.removePlongee(plongee);
 	}
 
 	@Override

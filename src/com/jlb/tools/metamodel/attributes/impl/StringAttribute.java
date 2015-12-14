@@ -8,6 +8,12 @@ public class StringAttribute implements IAttribute<String> {
 	private String mValue;
 	private String mUnit = "";
 
+	public StringAttribute(String name) {
+		mName = name;
+		mValue = null;
+		mUnit = "";
+	}
+
 	public StringAttribute(String name, String value) {
 		mName = name;
 		mValue = value;

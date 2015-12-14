@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.Plongeur;
-import com.jlb.plongee.datamodel.plongees.Plongee;
+import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.ihm.IController;
 import com.jlb.tools.metamodel.Entity;
 
@@ -34,12 +34,12 @@ public class ExercicesCtrl implements IController<ExercicesView> {
 		MN90.getLogger().debug(this, "Initialisation de la vue Plongees");
 		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 
-		List<Plongee> plongees = new ArrayList<Plongee>();
-		for (Entity ent : mPlongeur.getChildrenOfType(Plongee.class.getName())) {
-			plongees.add((Plongee) ent);
+		List<Exercice> plongees = new ArrayList<Exercice>();
+		for (Entity ent : mPlongeur.getChildrenOfType(Exercice.class.getName())) {
+			plongees.add((Exercice) ent);
 		}
 
-		ObservableList<Plongee> plongeesObservable = FXCollections.observableList(plongees);
+		ObservableList<Exercice> plongeesObservable = FXCollections.observableList(plongees);
 
 		mView.getPlongeesListe().setItems(plongeesObservable);
 		// mView.setStyle("-fx-border-color: #FF35FB;-fx-border-width: 2px;");

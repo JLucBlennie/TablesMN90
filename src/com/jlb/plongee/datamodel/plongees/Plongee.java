@@ -8,15 +8,34 @@ import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
 
 public abstract class Plongee extends Entity {
 
-	public static final String ATTRIBUTE_NAME = "Nom";
-	public static final String ATTRIBUTE_PROFONDEUR = "profondeur";
-	public static final String ATTRIBUTE_PROFONDEUR_UNIT = "m";
-	public static final String ATTRIBUTE_TEMPS_PLONGEES = "tempsplongee";
-	public static final String ATTRIBUTE_TEMPS_PLONGEE_UNIT = "min";
+	public static final String ATTRIBUTE_NAME = DICO_PROPERTIES.getString("datamodel.plongee.attribut.name");
+	public static final String ATTRIBUTE_PROFONDEUR = DICO_PROPERTIES
+			.getString("datamodel.plongee.attribut.profondeur");
+	public static final String ATTRIBUTE_PROFONDEUR_UNIT = DICO_PROPERTIES
+			.getString("datamodel.plongee.attribut.profondeur.unit");
+	public static final String ATTRIBUTE_TEMPS_PLONGEES = DICO_PROPERTIES
+			.getString("datamodel.plongee.attribut.tempsplongee");
+	public static final String ATTRIBUTE_TEMPS_PLONGEE_UNIT = DICO_PROPERTIES
+			.getString("datamodel.plongee.attribut.tempsplongee.unit");
 	private TablePlongee mTablePlongee;
+
+	public Plongee() {
+		super();
+
+		// Definition des attributs
+		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME);
+		mAttributes.add(attrName);
+		IntegerAttribute attrProfondeur = new IntegerAttribute(ATTRIBUTE_PROFONDEUR, ATTRIBUTE_PROFONDEUR_UNIT);
+		mAttributes.add(attrProfondeur);
+		IntegerAttribute attrTempsPlongee = new IntegerAttribute(ATTRIBUTE_TEMPS_PLONGEES,
+				ATTRIBUTE_TEMPS_PLONGEE_UNIT);
+		mAttributes.add(attrTempsPlongee);
+	}
 
 	public Plongee(int id, String name, int profondeur, int tempsPlongee) {
 		this.mId = id;
+
+		// Definition des attributs
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, name);
 		mAttributes.add(attrName);
 		IntegerAttribute attrProfondeur = new IntegerAttribute(ATTRIBUTE_PROFONDEUR, profondeur,

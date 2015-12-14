@@ -1,8 +1,7 @@
-package com.jlb.plongee.datamodel;
+package com.jlb.plongee.datamodel.logbook;
 
 import java.util.List;
 
-import com.jlb.plongee.datamodel.plongees.PlongeeLogBook;
 import com.jlb.tools.metamodel.Entity;
 
 /**
@@ -14,14 +13,16 @@ import com.jlb.tools.metamodel.Entity;
  */
 public class LogBook extends Entity {
 
-	static {
+	public LogBook() {
+		super();
 		// Definition des type de fils
 		mAuthorizedChildrenClass.add(PlongeeLogBook.class);
 	}
 
 	public LogBook(int id) {
 		this.mId = id;
-
+		// Definition des type de fils
+		mAuthorizedChildrenClass.add(PlongeeLogBook.class);
 	}
 
 	public void addPlongee(PlongeeLogBook plongee) {

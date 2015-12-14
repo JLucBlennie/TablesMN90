@@ -1,6 +1,5 @@
 package com.jlb.plongee.datamodel.exercices;
 
-import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -13,21 +12,28 @@ import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
  *
  */
 public class Exercice extends Entity {
-	public final static String ATTRIBUTE_NAME = "Nom";
-	public final static String ATTRIBUTE_TYPE = "Type";
+	public final static String ATTRIBUTE_NAME = DICO_PROPERTIES.getString("datamodel.exercice.attribut.name");
+	public final static String ATTRIBUTE_TYPE = DICO_PROPERTIES.getString("datamodel.exercice.attribut.type");
 
-	static {
+	public Exercice() {
+		super();
 		// Definition des type de fils
-		mAuthorizedChildrenClass.add(Plongee.class);
+		mAuthorizedChildrenClass.add(PlongeeExercice.class);
+
+		// Definition des attributs
+		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME);
+		mAttributes.add(attrName);
+		IntegerAttribute attrType = new IntegerAttribute(ATTRIBUTE_TYPE);
+		mAttributes.add(attrType);
 	}
 
 	public Exercice(int id, String nom, E_TYPE_EXERCICE type) {
 		this.mId = id;
 
+		// Definition des attributs
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, nom);
 		mAttributes.add(attrName);
 		IntegerAttribute attrType = new IntegerAttribute(ATTRIBUTE_TYPE, type.getIndex());
 		mAttributes.add(attrType);
 	}
-
 }

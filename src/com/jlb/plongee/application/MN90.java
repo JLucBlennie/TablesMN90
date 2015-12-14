@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import com.jlb.plongee.datamodel.MN90Version;
 import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.ihm.panels.MN90Ctrl;
 import com.jlb.tools.database.impl.DatabaseServiceSQLite;
 import com.jlb.tools.logging.ILogger;
 import com.jlb.tools.logging.LoggerFactory;
 import com.jlb.tools.metamodel.Entity;
+import com.jlb.tools.metamodel.Version;
 import com.jlb.tools.metamodel.criterion.ICriterion;
 import com.jlb.tools.metamodel.criterion.impl.AllCriterion;
 
@@ -54,10 +56,11 @@ public class MN90 extends Application {
 		// Récupération des donnees de la base de donnees
 		mLogger.debug(this, "Récupération des données de MN90 => "
 				+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
+		Version version = new MN90Version();
 		DatabaseServiceSQLite dbService = new DatabaseServiceSQLite(
-				TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
+				TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"), version.getDescription());
 
-		ICriterion<Entity> plongeursCriterion = new AllCriterion(Plongeur.class.getSimpleName());
+		ICriterion<Entity> plongeursCriterion = new AllCriterion(new Plongeur().getTableName());
 		List<Entity> plongeurs = dbService.requestObjects(plongeursCriterion);
 
 		primaryStage.initStyle(StageStyle.TRANSPARENT);

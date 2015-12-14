@@ -1,7 +1,8 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
 import java.util.List;
 
+import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -15,20 +16,35 @@ import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
  */
 public class PlongeeLogBook extends Plongee {
 
-	public static final String ATTRIBUT_THEME = "Theme";
-	public static final String ATTRIBUT_ENVIRONNEMENT = "Environnement";
-	public static final String ATTRIBUT_LIEU = "Lieu";
-	public static final String ATTRIBUT_COMMENT = "Commentaire";
+	public static final String ATTRIBUT_THEME = DICO_PROPERTIES.getString("datamodel.plongeelogbook.attribut.theme");
+	public static final String ATTRIBUT_ENVIRONNEMENT = DICO_PROPERTIES
+			.getString("datamodel.plongeelogbook.attribut.environnement");
+	public static final String ATTRIBUT_LIEU = DICO_PROPERTIES.getString("datamodel.plongeelogbook.attribut.lieu");
+	public static final String ATTRIBUT_COMMENT = DICO_PROPERTIES
+			.getString("datamodel.plongeelogbook.attribut.comment");
 
-	static {
-		// Definition des type de fils
-		mAuthorizedChildrenClass.add(Participant.class);
+	public PlongeeLogBook() {
+		super();
+
+		// Definition des attributs
+		IntegerAttribute attrTheme = new IntegerAttribute(ATTRIBUT_THEME);
+		mAttributes.add(attrTheme);
+
+		IntegerAttribute attrEnv = new IntegerAttribute(ATTRIBUT_ENVIRONNEMENT);
+		mAttributes.add(attrEnv);
+
+		IntegerAttribute attrLieu = new IntegerAttribute(ATTRIBUT_LIEU);
+		mAttributes.add(attrLieu);
+
+		StringAttribute attrComment = new StringAttribute(ATTRIBUT_COMMENT);
+		mAttributes.add(attrComment);
 	}
 
 	public PlongeeLogBook(int id, String name, int profondeur, int tempsPlongee, E_TYPE_THEME typeTheme,
 			E_TYPE_ENVIRONNEMENT typeEnvironnement, E_TYPE_LIEU typeLieu) {
 		super(id, name, profondeur, tempsPlongee);
 
+		// Definition des attributs
 		IntegerAttribute attrTheme = new IntegerAttribute(ATTRIBUT_THEME, typeTheme.getIndex());
 		mAttributes.add(attrTheme);
 
@@ -54,6 +70,16 @@ public class PlongeeLogBook extends Plongee {
 	}
 
 	public List<Entity> getParticipants() {
+		// TODO : Voir la recuperation des objets d'un type dans tout le
+		// datamodel par une requete sur la base de donnees
 		return getChildrenOfType(Participant.class.getName());
+	}
+
+	public void addSite(Site site) {
+		addLink(site);
+	}
+
+	public void removeSite(Site site) {
+		removeLink(site);
 	}
 }

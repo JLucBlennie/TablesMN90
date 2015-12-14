@@ -1,13 +1,14 @@
-package com.jlb.plongee.datamodel.plongees;
+package com.jlb.plongee.datamodel.logbook;
 
-public enum E_TYPE_LIEU {
+public enum E_TYPE_ENVIRONNEMENT {
 
-	MER(0, "Mer"), CARRIERE(1, "Carrière"), LAC(2, "Lac");
+	EPAVE(0, "Epave"), TOMBANT(1, "Tombant"), ROCHES(2, "Roches"), SABLE(3, "Sable"), PATATE_CORAIL(4,
+			"Patates de Corail");
 
 	private int mIndex;
 	private String mName;
 
-	E_TYPE_LIEU(int index, String name) {
+	E_TYPE_ENVIRONNEMENT(int index, String name) {
 		this.mIndex = index;
 		this.mName = name;
 	}

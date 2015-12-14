@@ -1,7 +1,7 @@
 package com.jlb.plongee.ihm.panels.plongeur.exercices;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.datamodel.plongees.Plongee;
+import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.ihm.MN90Constants;
 
 import javafx.geometry.Insets;
@@ -16,7 +16,7 @@ public class ExercicesView extends GridPane {
 
 	private Label mExercicesLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.exercices.nom.label"));
-	private ListView<Plongee> mExercicesListe = new ListView<Plongee>();
+	private ListView<Exercice> mExercicesListe = new ListView<Exercice>();
 	private Button mAjoutButton = new Button();
 	private Button mSupprButton = new Button();
 
@@ -55,7 +55,7 @@ public class ExercicesView extends GridPane {
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 	}
 
-	public ListView<Plongee> getPlongeesListe() {
+	public ListView<Exercice> getPlongeesListe() {
 		return mExercicesListe;
 	}
 }
