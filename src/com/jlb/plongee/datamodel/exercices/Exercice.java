@@ -1,5 +1,6 @@
 package com.jlb.plongee.datamodel.exercices;
 
+import com.jlb.plongee.datamodel.plongees.PlongeeExercice;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -35,5 +36,10 @@ public class Exercice extends Entity {
 		mAttributes.add(attrName);
 		IntegerAttribute attrType = new IntegerAttribute(ATTRIBUTE_TYPE, type.getIndex());
 		mAttributes.add(attrType);
+	}
+
+	@Override
+	public String toString() {
+		return (String) getAttribute(ATTRIBUTE_NAME).getValue();
 	}
 }

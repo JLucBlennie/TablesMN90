@@ -37,4 +37,8 @@ public class IntegerCriterion implements ICriterion<Integer> {
 		return mAttributeName;
 	}
 
+	@Override
+	public String toString() {
+		return mTableName + " - " + mAttributeName + " " + mOperator.name() + " " + mValue;
+	}
 }

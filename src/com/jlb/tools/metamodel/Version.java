@@ -1,5 +1,7 @@
 package com.jlb.tools.metamodel;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,4 +24,8 @@ public abstract class Version {
 	public Description getDescription() {
 		return mDescription;
 	}
+
+	public abstract Entity createEntity(String className, ResultSet rs) throws SQLException;
+
+	public abstract Link createLink(Entity src, Entity dest);
 }

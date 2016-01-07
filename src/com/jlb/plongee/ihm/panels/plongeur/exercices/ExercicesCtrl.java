@@ -18,7 +18,7 @@ public class ExercicesCtrl implements IController<ExercicesView> {
 	private Plongeur mPlongeur;
 
 	public ExercicesCtrl(Plongeur plongeur) {
-		MN90.getLogger().debug(this, "Ctor de PlongeesCtrl");
+		MN90.getLogger().debug(this, "Ctor de ExercicesCtrl");
 		this.mPlongeur = plongeur;
 		mView = new ExercicesView();
 		init();
@@ -31,7 +31,7 @@ public class ExercicesCtrl implements IController<ExercicesView> {
 
 	@Override
 	public void init() {
-		MN90.getLogger().debug(this, "Initialisation de la vue Plongees");
+		MN90.getLogger().debug(this, "Initialisation de la vue Exercices");
 		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 
 		List<Exercice> plongees = new ArrayList<Exercice>();

@@ -12,11 +12,13 @@ public interface IDatabaseServices {
 
 	public void storeObjects(List<Entity> objects);
 
-	public List<Entity> requestObjects(ICriterion criterion);
+	public List<Entity> requestEntities(ICriterion criterion);
 
-	public List<Link> requestLinks(Entity src);
+	public List<Link> requestLinks(Entity entity);
 
 	public void deleteObjects(List<Entity> objects);
+
+	public void deleteLinks(List<Link> links);
 
 	public void endService();
 }

@@ -21,7 +21,8 @@ public class MN90Ctrl implements IController<MN90View> {
 
 	public MN90Ctrl(List<Entity> plongeurs) {
 		MN90.getLogger().debug(this, "Ctor MN90 IController");
-		// TODO voir comment choisir le plongeur et gerer l'absence de plongeur.
+		// TODO : voir comment choisir le plongeur et gerer l'absence de
+		// plongeur.
 		mPlongeurCtrl = new PlongeurCtrl((Plongeur) plongeurs.get(0));
 		mView = new MN90View(mPlongeurCtrl.getView(), mCompartimentCtrl.getView());
 		init();

@@ -31,4 +31,9 @@ public class AllCriterion implements ICriterion<Entity> {
 	public String getAttributeName() {
 		return null;
 	}
+
+	@Override
+	public String toString() {
+		return "Tous les elements de type " + mTableName;
+	}
 }

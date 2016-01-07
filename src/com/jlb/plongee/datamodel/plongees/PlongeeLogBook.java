@@ -1,8 +1,12 @@
-package com.jlb.plongee.datamodel.logbook;
+package com.jlb.plongee.datamodel.plongees;
 
 import java.util.List;
 
-import com.jlb.plongee.datamodel.plongees.Plongee;
+import com.jlb.plongee.datamodel.logbook.E_TYPE_ENVIRONNEMENT;
+import com.jlb.plongee.datamodel.logbook.E_TYPE_LIEU;
+import com.jlb.plongee.datamodel.logbook.E_TYPE_THEME;
+import com.jlb.plongee.datamodel.logbook.Participant;
+import com.jlb.plongee.datamodel.logbook.Site;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -71,7 +75,8 @@ public class PlongeeLogBook extends Plongee {
 
 	public List<Entity> getParticipants() {
 		// TODO : Voir la recuperation des objets d'un type dans tout le
-		// datamodel par une requete sur la base de donnees
+		// datamodel par une requete sur la base de donnees a partir de la
+		// classe de version ???
 		return getChildrenOfType(Participant.class.getName());
 	}
 

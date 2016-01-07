@@ -58,10 +58,10 @@ public class MN90 extends Application {
 				+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
 		Version version = new MN90Version();
 		DatabaseServiceSQLite dbService = new DatabaseServiceSQLite(
-				TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"), version.getDescription());
+				TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"), version);
 
 		ICriterion<Entity> plongeursCriterion = new AllCriterion(new Plongeur().getTableName());
-		List<Entity> plongeurs = dbService.requestObjects(plongeursCriterion);
+		List<Entity> plongeurs = dbService.requestEntities(plongeursCriterion);
 
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		mLogger.debug(this, "Création du Controleur de MN90");

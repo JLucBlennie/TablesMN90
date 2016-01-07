@@ -1,6 +1,6 @@
-package com.jlb.plongee.datamodel.exercices;
+package com.jlb.plongee.datamodel.plongees;
 
-import com.jlb.plongee.datamodel.plongees.Plongee;
+import com.jlb.plongee.datamodel.exercices.E_TYPE_PLONGEE_EXERCICE;
 import com.jlb.tools.metamodel.attributes.impl.IntegerAttribute;
 
 public class PlongeeExercice extends Plongee {
