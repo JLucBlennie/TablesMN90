@@ -17,17 +17,18 @@ import com.jlb.plongee.datamodel.logbook.Site;
 import com.jlb.plongee.datamodel.plongees.PlongeeExercice;
 import com.jlb.plongee.datamodel.plongees.PlongeeLogBook;
 import com.jlb.plongee.datamodel.tools.Localisation;
+import com.jlb.tools.database.impl.DatabaseServiceSQLite;
+import com.jlb.tools.metamodel.DataProcessorServices;
 import com.jlb.tools.metamodel.Entity;
-import com.jlb.tools.metamodel.Link;
-import com.jlb.tools.metamodel.Version;
 
 /**
- * Classe decrivant le modele de donnees du logiciel MN90
+ * Classe decrivant le modele de donnees du logiciel MN90 sur une base de
+ * donnees SQLite
  * 
  * @author JLuc
  *
  */
-public class MN90Version extends Version {
+public class MN90DataProcessorServices extends DataProcessorServices {
 
 	static {
 		mClazzs.add(Plongeur.class);
@@ -35,12 +36,17 @@ public class MN90Version extends Version {
 		mClazzs.add(Site.class);
 	}
 
-	public MN90Version() {
+	public MN90DataProcessorServices(String databasePath) {
 		super();
+		try {
+			mDatabaseServices = new DatabaseServiceSQLite(databasePath);
+		} catch (SQLException | ClassNotFoundException e) {
+			MN90.getLogger().error(this, "Erreur lors de la connexion a la base de donnees " + databasePath, e);
+		}
 	}
 
 	@Override
-	public Entity createEntity(String className, ResultSet rs) throws SQLException {
+	protected Entity createEntity(String className, ResultSet rs) throws SQLException {
 		Entity entity = null;
 		if (className.equals(Plongeur.class.getName())) {
 			entity = new Plongeur(rs.getInt("Id"), rs.getString(Plongeur.ATTRIBUTE_NAME));
@@ -73,8 +79,4 @@ public class MN90Version extends Version {
 		return entity;
 	}
 
-	@Override
-	public Link createLink(Entity src, Entity dest) {
-		return new Link(src, dest);
-	}
 }

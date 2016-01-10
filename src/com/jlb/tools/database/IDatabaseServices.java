@@ -1,24 +1,21 @@
 package com.jlb.tools.database;
 
-import java.util.List;
-
-import com.jlb.tools.metamodel.Entity;
-import com.jlb.tools.metamodel.Link;
-import com.jlb.tools.metamodel.criterion.ICriterion;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public interface IDatabaseServices {
 
-	public void createDatabase();
+	public void dropTable(String tableName) throws SQLException;
 
-	public void storeObjects(List<Entity> objects);
+	public void createTable(String tableName, String attributesDefintion) throws SQLException;
 
-	public List<Entity> requestEntities(ICriterion criterion);
+	public void insertData(String tableName, String values) throws SQLException;
 
-	public List<Link> requestLinks(Entity entity);
+	public ResultSet executeSelectFrom(String tableName) throws SQLException;
 
-	public void deleteObjects(List<Entity> objects);
+	public ResultSet executeSelectFromWhere(String tabelName, String whereClause) throws SQLException;
 
-	public void deleteLinks(List<Link> links);
+	public void deleteDataWhere(String tableName, String whereClause) throws SQLException;
 
-	public void endService();
+	public void endService() throws SQLException;
 }

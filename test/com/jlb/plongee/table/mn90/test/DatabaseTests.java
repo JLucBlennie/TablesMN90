@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.jlb.plongee.datamodel.MN90Version;
+import com.jlb.plongee.datamodel.MN90DataProcessorServices;
 import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.datamodel.exercices.E_TYPE_EXERCICE;
 import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.datamodel.logbook.Participant;
-import com.jlb.tools.database.impl.DatabaseServiceSQLite;
+import com.jlb.tools.metamodel.DataProcessorServices;
 import com.jlb.tools.metamodel.Entity;
-import com.jlb.tools.metamodel.Version;
 import com.jlb.tools.metamodel.criterion.E_OPERATOR;
 import com.jlb.tools.metamodel.criterion.impl.AllCriterion;
 import com.jlb.tools.metamodel.criterion.impl.IntegerCriterion;
@@ -24,9 +23,8 @@ public class DatabaseTests {
 		List<Class<? extends Entity>> clazzs = new ArrayList<Class<? extends Entity>>();
 		clazzs.add(Plongeur.class);
 		clazzs.add(Participant.class);
-		Version versionDM = new MN90Version();
-		DatabaseServiceSQLite mService = new DatabaseServiceSQLite("database/mn90.db", versionDM);
-		mService.createDatabase();
+		DataProcessorServices dpServices = new MN90DataProcessorServices("database/mn90.db");
+		dpServices.createDatabase();
 		Plongeur plongeur = new Plongeur(0, "Moi");
 		plongeur.addExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE));
 		List<Entity> objects = new ArrayList<Entity>();
@@ -35,19 +33,19 @@ public class DatabaseTests {
 		plongeur2.addExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
 		plongeur2.addExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
 		objects.add(plongeur2);
-		mService.storeObjects(objects);
-		List<Entity> list = mService
+		dpServices.storeObjects(objects);
+		List<Entity> list = dpServices
 				.requestEntities(new IntegerCriterion(Plongeur.class.getSimpleName(), "Id", E_OPERATOR.EQUALS, 2));
 		for (Entity entity : list) {
 			System.out.println(entity);
 		}
 		List<Entity> objToDelete = new ArrayList<Entity>();
 		objToDelete.add(objects.get(1));
-		mService.deleteObjects(objToDelete);
-		list = mService.requestEntities(new AllCriterion(Plongeur.class.getSimpleName()));
+		dpServices.deleteObjects(objToDelete);
+		list = dpServices.requestEntities(new AllCriterion(Plongeur.class.getSimpleName()));
 		for (Entity entity : list) {
 			System.out.println(entity);
 		}
-		mService.endService();
+		dpServices.endDatabaseService();
 	}
 }

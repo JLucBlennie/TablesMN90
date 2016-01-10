@@ -19,7 +19,7 @@ public class MN90View extends GridPane {
 
 	private Button mExitButton = new Button();
 
-	private Label mVersion = new Label("Version : " + MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.version"));
+	private Label mVersion = new Label("DataProcessorServices : " + MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.version"));
 	private Label mApplicationName = new Label(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre") + "\n"
 			+ MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.sous-titre"));
 
