@@ -3,7 +3,9 @@ package com.jlb.tools.metamodel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.jlb.plongee.application.MN90;
 import com.jlb.tools.database.IDatabaseServices;
@@ -26,10 +28,14 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 
 	protected IDatabaseServices mDatabaseServices;
 
-	// TODO : Il faut peut-etre garder en memoire les objets charges lors des
-	// requetes pour ne pas creer les objets plusieurs fois... Il faut surement
-	// le faire au niveau de la classe de version. A ce moment la il faudra
-	// revoir la presence de la version dans le service de base de donnees
+	// Il faut garder en memoire les objets charges lors des
+	// requetes pour ne pas creer les objets plusieurs fois...
+	// Gestion des Entities chargees, la clef est le nom de la table (nom simple
+	// de la classe) et l'Id
+	protected Map<String, Entity> mCacheEntities = new HashMap<String, Entity>();
+	// Gestion du chache des liens, la clef est le nom de la table + id de la
+	// source et le nom de la table et l'Id de la destination.
+	protected Map<String, Link> mCacheLinks = new HashMap<String, Link>();
 
 	public DataProcessorServices() {
 		mDescription = new Description(mClazzs);
@@ -72,8 +78,8 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 	}
 
 	@Override
-	public void storeObjects(List<Entity> objects) {
-		for (Entity obj : objects) {
+	public void storeEntities(List<Entity> entities) {
+		for (Entity obj : entities) {
 			try {
 				String tableName = mDescription.getTableName(obj.getClass().getName());
 				String parentTableName = obj.getParent() != null
@@ -92,13 +98,19 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 				mDatabaseServices.insertData(tableName, values);
 				// On s'occupe des fils
 				MN90.getLogger().info(this, "Persistence des fils de l'objet " + obj);
-				storeObjects(obj.getChildren());
+				storeEntities(obj.getChildren());
+
+				// On ajoute l'entity dans le cache
+				mCacheEntities.put(obj.getTableName() + "_" + obj.getId(), obj);
 
 				// On s'occupe des liens
 				for (Link lnk : obj.getLinks()) {
-					String valuesLink = lnk.getSource().getId() + "','" + lnk.getSource().getId() + "','"
+					String valuesLink = lnk.getSource().getId() + "','" + lnk.getSource().getTableName() + "','"
 							+ lnk.getDestination().getId() + "','" + lnk.getDestination().getTableName();
 					mDatabaseServices.insertData("Link", valuesLink);
+					// On ajoute le lien dans le cache
+					mCacheLinks.put(lnk.getSource().getTableName() + "_" + lnk.getSource().getId() + "_"
+							+ lnk.getDestination().getTableName() + "_" + lnk.getDestination().getId(), lnk);
 				}
 
 				MN90.getLogger().info(this, "Persistence des liens de l'objet " + obj);
@@ -111,34 +123,79 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 	@Override
 	public List<Entity> requestEntities(ICriterion criterion) {
 		List<Entity> result = new ArrayList<Entity>();
+		String tableName = criterion.getTableName();
+		String attrName = criterion.getAttributeName();
+
+		// On cherche dans le cache
+		for (String key : mCacheEntities.keySet()) {
+			if (key.contains(tableName)) {
+				Entity ent = mCacheEntities.get(key);
+				if (criterion.getOperator() == E_OPERATOR.EQUALS) {
+					if (ent.getAttribute(attrName).getValue() == criterion.getValue()) {
+						result.add(ent);
+					}
+				} else if (criterion.getOperator() == E_OPERATOR.GREATER) {
+					if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
+						if ((int) ent.getAttribute(attrName).getValue() > (int) criterion.getValue()) {
+							result.add(ent);
+						}
+					} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
+						if ((double) ent.getAttribute(attrName).getValue() > (double) criterion.getValue()) {
+							result.add(ent);
+						}
+					} else {
+						MN90.getLogger().error(this, "Le critere de recherche n'est pas pris en compte " + criterion,
+								null);
+					}
+				} else if (criterion.getOperator() == E_OPERATOR.LOWER) {
+					if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
+						if ((int) ent.getAttribute(attrName).getValue() < (int) criterion.getValue()) {
+							result.add(ent);
+						}
+					} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
+						if ((double) ent.getAttribute(attrName).getValue() < (double) criterion.getValue()) {
+							result.add(ent);
+						}
+					} else {
+						MN90.getLogger().error(this, "Le critere de recherche n'est pas pris en compte " + criterion,
+								null);
+					}
+				}
+			}
+		}
+
+		// on recherche en base
 		ResultSet rs;
 		try {
-			if (criterion.getAttributeName() == null) {
-				rs = mDatabaseServices.executeSelectFrom(criterion.getTableName());
+			if (attrName == null) {
+				rs = mDatabaseServices.executeSelectFrom(tableName);
 			} else {
-				rs = mDatabaseServices.executeSelectFromWhere(criterion.getTableName(), criterion.getAttributeName()
-						+ " " + criterion.getOperator() + " '" + criterion.getValue() + "'");
+				rs = mDatabaseServices.executeSelectFromWhere(tableName,
+						attrName + " " + criterion.getOperator() + " '" + criterion.getValue() + "'");
 			}
 
-			Class<Entity> tableClass = (Class<Entity>) Class
-					.forName(mDescription.getClassName(criterion.getTableName()));
+			Class<Entity> tableClass = (Class<Entity>) Class.forName(mDescription.getClassName(tableName));
 			Entity entity = null;
 			while (rs.next()) {
 				String tableClassName = tableClass.getName();
 				entity = createEntity(tableClassName, rs);
-				result.add(entity);
-				MN90.getLogger().debug(this, entity.toString());
-				// On doit s'occuper des fils
-				if (rs.getInt("nbFils") > 0) {
-					for (Class childClass : entity.getAuthorizedChildrenClass()) {
-						ICriterion<Integer> childrenIdCriterion = new IntegerCriterion(
-								mDescription.getTableName(childClass.getName()), "idParent", E_OPERATOR.EQUALS,
-								entity.getId());
-						for (Entity ent : requestEntities(childrenIdCriterion)) {
-							ent.setParent(entity);
-							entity.getChildren().add(ent);
+				if (!mCacheEntities.containsKey(entity.getTableName() + "_" + entity.getId())) {
+					mCacheEntities.put(entity.getTableName() + "_" + entity.getId(), entity);
+					result.add(entity);
+					// On doit s'occuper des fils
+					if (rs.getInt("nbFils") > 0) {
+						for (Class childClass : entity.getAuthorizedChildrenClass()) {
+							ICriterion<Integer> childrenIdCriterion = new IntegerCriterion(
+									mDescription.getTableName(childClass.getName()), "idParent", E_OPERATOR.EQUALS,
+									entity.getId());
+							for (Entity ent : requestEntities(childrenIdCriterion)) {
+								ent.setParent(entity);
+								entity.getChildren().add(ent);
+							}
 						}
 					}
+				} else {
+					result.add(mCacheEntities.get(entity.getTableName() + "_" + entity.getId()));
 				}
 			}
 		} catch (SQLException | ClassNotFoundException | SecurityException e) {
@@ -149,8 +206,17 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 
 	@Override
 	public List<Link> requestLinks(Entity entity) {
-		// Recuperer les liens qui ont pour source ou destination l'entite src
 		List<Link> links = new ArrayList<Link>();
+		// TODO : On cherche dans le cache des liens.
+		int idEntity = entity.getId();
+		String entityTableName = entity.getTableName();
+		for (String linkId : mCacheLinks.keySet()) {
+			if (linkId.contains(entityTableName + "_" + idEntity)) {
+				links.add(mCacheLinks.get(linkId));
+			}
+		}
+
+		// Recuperer les liens qui ont pour source ou destination l'entite src
 		try {
 			ResultSet rs = mDatabaseServices.executeSelectFromWhere("Link",
 					"idSrc='" + entity.getId() + "' or  idDest='" + entity.getId() + "'");

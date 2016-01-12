@@ -33,7 +33,7 @@ public class DatabaseTests {
 		plongeur2.addExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
 		plongeur2.addExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
 		objects.add(plongeur2);
-		dpServices.storeObjects(objects);
+		dpServices.storeEntities(objects);
 		List<Entity> list = dpServices
 				.requestEntities(new IntegerCriterion(Plongeur.class.getSimpleName(), "Id", E_OPERATOR.EQUALS, 2));
 		for (Entity entity : list) {
