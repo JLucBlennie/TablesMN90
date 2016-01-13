@@ -37,14 +37,14 @@ public class DatabaseTests {
 		List<Entity> list = dpServices
 				.requestEntities(new IntegerCriterion(Plongeur.class.getSimpleName(), "Id", E_OPERATOR.EQUALS, 2));
 		for (Entity entity : list) {
-			System.out.println(entity);
+			System.out.println("==> Avant Delete - Resultat Requete : " + entity);
 		}
 		List<Entity> objToDelete = new ArrayList<Entity>();
 		objToDelete.add(objects.get(1));
 		dpServices.deleteObjects(objToDelete);
 		list = dpServices.requestEntities(new AllCriterion(Plongeur.class.getSimpleName()));
 		for (Entity entity : list) {
-			System.out.println(entity);
+			System.out.println("==> Apres Delete - Resultat Requete : " + entity);
 		}
 		dpServices.endDatabaseService();
 	}

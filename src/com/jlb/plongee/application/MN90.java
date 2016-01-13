@@ -63,10 +63,10 @@ public class MN90 extends Application {
 
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
 		mLogger.debug(this, "Création du Controleur de MN90");
-		MN90Ctrl tablesMN90Ctrl = new MN90Ctrl(plongeurs);
+		MN90Ctrl tablesMN90Ctrl = new MN90Ctrl(dpServices, plongeurs);
 
 		mLogger.debug(this, "Création de la Scene JavaFx à partir de la vue principale");
-		Scene scene = new Scene(tablesMN90Ctrl.getView(), 1400, 800, Color.TRANSPARENT);
+		Scene scene = new Scene(tablesMN90Ctrl.getView(), 1600, 800, Color.TRANSPARENT);
 		mLogger.debug(this, "Chargement de la feuille de style "
 				+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.css.principal"));
 		scene.getStylesheets().add(TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.css.principal"));

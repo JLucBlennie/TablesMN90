@@ -9,8 +9,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class ExercicesView extends GridPane {
 
@@ -19,8 +21,11 @@ public class ExercicesView extends GridPane {
 	private ListView<Exercice> mExercicesListe = new ListView<Exercice>();
 	private Button mAjoutButton = new Button();
 	private Button mSupprButton = new Button();
+	private Label mTableLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.exercices.table.label"));
+	private TextField mTable = new TextField(MN90.class.getSimpleName());
 
-	public ExercicesView() {
+	public ExercicesView(Pane plongeeView, Pane compartimentPane) {
 		MN90.getLogger().debug(this, "Contruction de la vue Exercices");
 
 		this.setVgap(5);
@@ -43,19 +48,32 @@ public class ExercicesView extends GridPane {
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue Exercices");
 		this.add(this.mExercicesLabel, 0, 0);
-		this.add(this.mExercicesListe, 0, 1, 2, 1);
+		this.add(plongeeView, 2, 0, 1, 3);
+		this.add(this.mExercicesListe, 0, 1);
 
 		HBox buttonsContainer = new HBox(10);
 		buttonsContainer.getChildren().add(this.mAjoutButton);
 		buttonsContainer.getChildren().add(this.mSupprButton);
 		buttonsContainer.setAlignment(Pos.CENTER);
-		this.add(buttonsContainer, 0, 2, 2, 1);
+		this.add(buttonsContainer, 0, 2);
 
+		this.add(mTableLabel, 0, 3);
+		this.mTable.setStyle("-fx-background-color: transparent;");
+		this.add(mTable, 1, 3);
+		this.add(compartimentPane, 0, 4, 2, 1);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 	}
 
-	public ListView<Exercice> getPlongeesListe() {
+	public ListView<Exercice> getExercicesList() {
 		return mExercicesListe;
+	}
+
+	public Button getAjoutButton() {
+		return mAjoutButton;
+	}
+
+	public Button getSupprButton() {
+		return mSupprButton;
 	}
 }

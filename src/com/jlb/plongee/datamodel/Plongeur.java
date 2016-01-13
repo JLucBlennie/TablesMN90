@@ -64,11 +64,6 @@ public class Plongeur extends Entity {
 		// Definition des Attributs
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, nom);
 		mAttributes.add(attrName);
-
-		// Ajout d'un seul carnet de plongees
-		LogBook logBook = new LogBook(this.mId);
-		logBook.setParent(this);
-		mChildren.add(logBook);
 	}
 
 	public void plonge(int i) throws PalierNonTrouveException {
@@ -98,6 +93,14 @@ public class Plongeur extends Entity {
 	public void removePlongeeFromLogbook(PlongeeLogBook plongee) {
 		LogBook logbook = (LogBook) getChildOfType(LogBook.class.getName(), 0);
 		logbook.removePlongee(plongee);
+	}
+
+	public void addLogBook(LogBook logBook) {
+		boolean noLogBookFound = (getChildrenOfType(LogBook.class.getName()).size() == 0);
+		if (!mChildren.contains(logBook) && noLogBookFound) {
+			logBook.setParent(this);
+			mChildren.add(logBook);
+		}
 	}
 
 	@Override

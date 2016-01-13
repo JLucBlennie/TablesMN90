@@ -3,14 +3,12 @@ package com.jlb.plongee.ihm.panels.plongeur;
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.ihm.IController;
-import com.jlb.plongee.ihm.panels.plongees.PlongeesCtrl;
 import com.jlb.plongee.ihm.panels.plongeur.exercices.ExercicesCtrl;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
 
 public class PlongeurCtrl implements IController<PlongeurView> {
 
 	private ExercicesCtrl mExercicesCtrl;
-	private PlongeesCtrl mPlongeesCtrl = new PlongeesCtrl();
 	private Plongeur mPlongeur;
 
 	private PlongeurView mView;
@@ -20,7 +18,7 @@ public class PlongeurCtrl implements IController<PlongeurView> {
 
 		this.mPlongeur = plongeur;
 		this.mExercicesCtrl = new ExercicesCtrl(plongeur);
-		mView = new PlongeurView(mExercicesCtrl.getView(), mPlongeesCtrl.getView());
+		mView = new PlongeurView(mExercicesCtrl.getView());
 		init();
 	}
 

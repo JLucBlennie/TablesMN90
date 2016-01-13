@@ -12,6 +12,7 @@ import com.jlb.tools.database.IDatabaseServices;
 import com.jlb.tools.metamodel.attributes.IAttribute;
 import com.jlb.tools.metamodel.criterion.E_OPERATOR;
 import com.jlb.tools.metamodel.criterion.ICriterion;
+import com.jlb.tools.metamodel.criterion.impl.AllCriterion;
 import com.jlb.tools.metamodel.criterion.impl.IntegerCriterion;
 
 /**
@@ -127,38 +128,79 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 		String attrName = criterion.getAttributeName();
 
 		// On cherche dans le cache
-		for (String key : mCacheEntities.keySet()) {
-			if (key.contains(tableName)) {
-				Entity ent = mCacheEntities.get(key);
-				if (criterion.getOperator() == E_OPERATOR.EQUALS) {
-					if (ent.getAttribute(attrName).getValue() == criterion.getValue()) {
-						result.add(ent);
-					}
-				} else if (criterion.getOperator() == E_OPERATOR.GREATER) {
-					if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
-						if ((int) ent.getAttribute(attrName).getValue() > (int) criterion.getValue()) {
+		// TODO : Gerer le cas d'un critere ALLCriterion.
+		if (criterion instanceof AllCriterion) {
+			result = getEntitiesOfTypeFromCache(criterion.getTableName());
+		} else {
+			for (String key : mCacheEntities.keySet()) {
+				if (key.contains(tableName)) {
+					Entity ent = mCacheEntities.get(key);
+					if (criterion.getOperator() == E_OPERATOR.EQUALS) {
+						if (attrName.equalsIgnoreCase("Id")) {
+							if (ent.getId() == (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equalsIgnoreCase("idParent")) {
+							if (ent.getParent().getId() == (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equals("typeParent")) {
+							if (ent.getParent().getTableName().equals(criterion.getValue())) {
+								result.add(ent);
+							}
+						} else if (ent.getAttribute(attrName).getValue() == criterion.getValue()) {
 							result.add(ent);
 						}
-					} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
-						if ((double) ent.getAttribute(attrName).getValue() > (double) criterion.getValue()) {
-							result.add(ent);
+					} else if (criterion.getOperator() == E_OPERATOR.GREATER) {
+						if (attrName.equalsIgnoreCase("Id")) {
+							if (ent.getId() > (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equalsIgnoreCase("idParent")) {
+							if (ent.getParent().getId() > (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equals("typeParent")) {
+							if (ent.getParent().getTableName().contains((String) criterion.getValue())) {
+								result.add(ent);
+							}
+						} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
+							if ((int) ent.getAttribute(attrName).getValue() > (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
+							if ((double) ent.getAttribute(attrName).getValue() > (double) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else {
+							MN90.getLogger().error(this,
+									"Le critere de recherche n'est pas pris en compte " + criterion, null);
 						}
-					} else {
-						MN90.getLogger().error(this, "Le critere de recherche n'est pas pris en compte " + criterion,
-								null);
-					}
-				} else if (criterion.getOperator() == E_OPERATOR.LOWER) {
-					if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
-						if ((int) ent.getAttribute(attrName).getValue() < (int) criterion.getValue()) {
-							result.add(ent);
+					} else if (criterion.getOperator() == E_OPERATOR.LOWER) {
+						if (attrName.equalsIgnoreCase("Id")) {
+							if (ent.getId() < (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equalsIgnoreCase("idParent")) {
+							if (ent.getParent().getId() < (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (attrName.equals("typeParent")) {
+							if (ent.getParent().getTableName().contains((String) criterion.getValue())) {
+								result.add(ent);
+							}
+						} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("integer")) {
+							if ((int) ent.getAttribute(attrName).getValue() < (int) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
+							if ((double) ent.getAttribute(attrName).getValue() < (double) criterion.getValue()) {
+								result.add(ent);
+							}
+						} else {
+							MN90.getLogger().error(this,
+									"Le critere de recherche n'est pas pris en compte " + criterion, null);
 						}
-					} else if (ent.getAttribute(attrName).getType().equalsIgnoreCase("double")) {
-						if ((double) ent.getAttribute(attrName).getValue() < (double) criterion.getValue()) {
-							result.add(ent);
-						}
-					} else {
-						MN90.getLogger().error(this, "Le critere de recherche n'est pas pris en compte " + criterion,
-								null);
 					}
 				}
 			}
@@ -194,12 +236,20 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 							}
 						}
 					}
-				} else {
-					result.add(mCacheEntities.get(entity.getTableName() + "_" + entity.getId()));
 				}
 			}
 		} catch (SQLException | ClassNotFoundException | SecurityException e) {
 			MN90.getLogger().error(this, "Erreur lors de la requete " + criterion, e);
+		}
+		return result;
+	}
+
+	private List<Entity> getEntitiesOfTypeFromCache(String tableName) {
+		List<Entity> result = new ArrayList<Entity>();
+		for (String key : mCacheEntities.keySet()) {
+			if (key.contains(tableName)) {
+				result.add(mCacheEntities.get(key));
+			}
 		}
 		return result;
 	}
@@ -263,6 +313,7 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 						deleteObjects(requestEntities(childrenIdCriterion));
 					}
 				}
+				mCacheEntities.remove(obj.getTableName() + "_" + obj.getId());
 
 				// On doit s'occuper des liens
 				// Recuperation des liens qui pointent obj
@@ -280,6 +331,8 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 			try {
 				mDatabaseServices.deleteDataWhere("Link",
 						"idSrc='" + link.getSource().getId() + "' and idDest='" + link.getDestination().getId() + "'");
+				mCacheLinks.remove(link.getSource().getTableName() + "_" + link.getSource().getId() + "_"
+						+ link.getDestination().getTableName() + "_" + link.getDestination().getId());
 			} catch (SQLException e) {
 				MN90.getLogger().error(this, "Erreur lors de la suppression du lien " + link, e);
 			}
@@ -314,6 +367,7 @@ public abstract class DataProcessorServices implements IDataProcessorServices {
 	@Override
 	public void endDatabaseService() {
 		try {
+			MN90.getLogger().info(this, "Fin du service de base de donnees");
 			mDatabaseServices.endService();
 		} catch (SQLException e) {
 			MN90.getLogger().error(this, "Erreur lors de la fermerture de la base de donnee", e);
