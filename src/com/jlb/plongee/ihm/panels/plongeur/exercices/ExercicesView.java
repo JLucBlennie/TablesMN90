@@ -4,7 +4,6 @@ import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.ihm.MN90Constants;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,11 +24,11 @@ public class ExercicesView extends GridPane {
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.exercices.table.label"));
 	private TextField mTable = new TextField(MN90.class.getSimpleName());
 
-	public ExercicesView(Pane plongeeView, Pane compartimentPane) {
+	public ExercicesView(Pane exerciceView, Pane compartimentPane) {
 		MN90.getLogger().debug(this, "Contruction de la vue Exercices");
 
-		this.setVgap(5);
-		this.setHgap(5);
+		// this.setVgap(5);
+		// this.setHgap(5);
 
 		this.mAjoutButton.setMaxSize(MN90Constants.TAILLE_BOUTON_WIDTH_DEFAULT,
 				MN90Constants.TAILLE_BOUTON_HEIGHT_DEFAULT);
@@ -48,7 +47,7 @@ public class ExercicesView extends GridPane {
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue Exercices");
 		this.add(this.mExercicesLabel, 0, 0);
-		this.add(plongeeView, 2, 0, 1, 3);
+		this.add(exerciceView, 1, 0, 1, 3);
 		this.add(this.mExercicesListe, 0, 1);
 
 		HBox buttonsContainer = new HBox(10);
@@ -61,7 +60,7 @@ public class ExercicesView extends GridPane {
 		this.mTable.setStyle("-fx-background-color: transparent;");
 		this.add(mTable, 1, 3);
 		this.add(compartimentPane, 0, 4, 2, 1);
-		this.setPadding(new Insets(10, 10, 10, 10));
+		// this.setPadding(new Insets(10, 10, 10, 10));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
 	}
 

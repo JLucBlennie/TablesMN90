@@ -48,6 +48,7 @@ public class MN90DataProcessorServices extends DataProcessorServices {
 	@Override
 	protected Entity createEntity(String className, ResultSet rs) throws SQLException {
 		Entity entity = null;
+		MN90.getLogger().debug(this, "Creation de l'objet de type " + className);
 		if (className.equals(Plongeur.class.getName())) {
 			entity = new Plongeur(rs.getInt("Id"), rs.getString(Plongeur.ATTRIBUTE_NAME));
 		} else if (className.equals(Exercice.class.getName())) {

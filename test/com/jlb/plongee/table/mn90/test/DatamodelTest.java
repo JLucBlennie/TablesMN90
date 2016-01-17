@@ -11,7 +11,7 @@ public class DatamodelTest {
 	@Test
 	public void test() {
 		Plongeur plongeur = new Plongeur(0, "JLuc");
-		Exercice exo1 = new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE);
+		Exercice exo1 = new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.SIMPLE);
 		plongeur.addExercice(exo1);
 	}
 

@@ -51,6 +51,8 @@ public class MN90Ctrl implements IController<MN90View> {
 				MN90.getLogger().info(this, "Sauvegarde des données");
 				mDPServices.storeEntities(mPlongeurs);
 				mDPServices.endDatabaseService();
+				MN90.getLogger().debug(this, "Release du lock");
+				MN90.releaseLock();
 				Platform.exit();
 				MN90.getLogger().debug(this, "Fin de l'application");
 				System.exit(0);

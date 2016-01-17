@@ -2,7 +2,7 @@ package com.jlb.plongee.datamodel.exercices;
 
 public enum E_TYPE_EXERCICE {
 
-	UNE_PLONGEE(0), DEUX_PLONGEES(1);
+	SIMPLE(0), CONSECUTIVE(1), SUCCESSIVE(2);
 
 	private int mIndex;
 

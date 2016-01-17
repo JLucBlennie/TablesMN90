@@ -23,4 +23,8 @@ public class PlongeesCtrl implements IController<PlongeesView> {
 		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
 	}
 
+	public void showPlongee() {
+		// TODO : Gestion de l'affichage de la/les plongee(s)
+	}
+
 }

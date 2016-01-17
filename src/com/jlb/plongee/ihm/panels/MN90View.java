@@ -19,8 +19,8 @@ public class MN90View extends GridPane {
 
 	private Button mExitButton = new Button();
 
-	private Label mVersion = new Label(
-			"DataProcessorServices : " + MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.version"));
+	private Label mVersion = new Label(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre") + " v"
+			+ MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.version"));
 	private Label mApplicationName = new Label(MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre") + "\n"
 			+ MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.sous-titre"));
 
@@ -52,7 +52,7 @@ public class MN90View extends GridPane {
 		this.mExitButton.setMinSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
 		this.mExitButton.setPrefSize(MN90Constants.TAILLE_BOUTON_WIDTH_EXIT, MN90Constants.TAILLE_BOUTON_HEIGHT_EXIT);
 		this.mExitButton.setId("exitButton");
-		GridPane.setHalignment(this.mExitButton, HPos.CENTER);
+		GridPane.setHalignment(this.mExitButton, HPos.LEFT);
 		this.add(this.mExitButton, 1, 0);
 		this.add(plongeurPane, 0, 0);
 		this.mVersion.setId("version");

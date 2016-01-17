@@ -26,12 +26,12 @@ public class DatabaseTests {
 		DataProcessorServices dpServices = new MN90DataProcessorServices("database/mn90.db");
 		dpServices.createDatabase();
 		Plongeur plongeur = new Plongeur(0, "Moi");
-		plongeur.addExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur.addExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.SIMPLE));
 		List<Entity> objects = new ArrayList<Entity>();
 		objects.add(plongeur);
 		Plongeur plongeur2 = new Plongeur(2, "Toi");
-		plongeur2.addExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.UNE_PLONGEE));
-		plongeur2.addExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.UNE_PLONGEE));
+		plongeur2.addExercice(new Exercice(1, "Exercice 2", E_TYPE_EXERCICE.SIMPLE));
+		plongeur2.addExercice(new Exercice(2, "Exercice 3", E_TYPE_EXERCICE.SIMPLE));
 		objects.add(plongeur2);
 		dpServices.storeEntities(objects);
 		List<Entity> list = dpServices

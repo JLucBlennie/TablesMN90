@@ -26,7 +26,6 @@ public class PlongeurView extends GridPane {
 		this.add(exercicesView, 0, 1, 2, 1);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
-
 	}
 
 	public TextField getPlongeurNameText() {

@@ -6,10 +6,12 @@ import java.util.List;
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.datamodel.exercices.E_TYPE_EXERCICE;
+import com.jlb.plongee.datamodel.exercices.E_TYPE_PLONGEE_EXERCICE;
 import com.jlb.plongee.datamodel.exercices.Exercice;
+import com.jlb.plongee.datamodel.plongees.PlongeeExercice;
 import com.jlb.plongee.ihm.IController;
 import com.jlb.plongee.ihm.panels.compartiments.CompartimentCtrl;
-import com.jlb.plongee.ihm.panels.plongees.PlongeesCtrl;
+import com.jlb.plongee.ihm.panels.plongeur.exercices.exercice.ExerciceCtrl;
 import com.jlb.tools.metamodel.Entity;
 
 import javafx.collections.FXCollections;
@@ -21,15 +23,15 @@ import javafx.scene.input.MouseEvent;
 public class ExercicesCtrl implements IController<ExercicesView> {
 
 	private ExercicesView mView;
-	private PlongeesCtrl mPlongeesCtrl;
+	private ExerciceCtrl mExerciceCtrl;
 	private CompartimentCtrl mCompartimentCtrl = new CompartimentCtrl();
 	private Plongeur mPlongeur;
 
 	public ExercicesCtrl(Plongeur plongeur) {
 		MN90.getLogger().debug(this, "Ctor de ExercicesCtrl");
 		this.mPlongeur = plongeur;
-		mPlongeesCtrl = new PlongeesCtrl();
-		mView = new ExercicesView(mPlongeesCtrl.getView(), mCompartimentCtrl.getView());
+		mExerciceCtrl = new ExerciceCtrl();
+		mView = new ExercicesView(mExerciceCtrl.getView(), mCompartimentCtrl.getView());
 		init();
 	}
 
@@ -50,9 +52,9 @@ public class ExercicesCtrl implements IController<ExercicesView> {
 				// On doit afficher l'eercice selectionne
 				MN90.getLogger().debug(this,
 						"Selection de l'exercice : " + mView.getExercicesList().getSelectionModel().getSelectedItem());
-				// TODO : Faire la mise a jour de la vue plongee
+				// Mise a jour de la vue exercice
+				mExerciceCtrl.setExercice(mView.getExercicesList().getSelectionModel().getSelectedItem());
 			}
-
 		});
 
 		refreshList();
@@ -67,7 +69,13 @@ public class ExercicesCtrl implements IController<ExercicesView> {
 				MN90.getLogger().debug(this, "--> Bouton +");
 				// TODO : Mettre en place une IHM pour renseigner les elements
 				// de l'exercice...
-				Exercice exoToAdd = new Exercice(0, "Exercice 1 bis", E_TYPE_EXERCICE.UNE_PLONGEE);
+				Exercice exoToAdd = new Exercice(mPlongeur.getChildrenOfType(Exercice.class.getName()).size(),
+						"Mon nouvel Exercice", E_TYPE_EXERCICE.SIMPLE);
+				// Ajout d'une plongee
+				PlongeeExercice plongee1 = new PlongeeExercice(0, "Plongee 1", 20, 40, E_TYPE_PLONGEE_EXERCICE.SIMPLE);
+				exoToAdd.addPlongee(plongee1);
+				PlongeeExercice plongee2 = new PlongeeExercice(1, "Plongee 2", 20, 40, E_TYPE_PLONGEE_EXERCICE.SIMPLE);
+				exoToAdd.addPlongee(plongee2);
 				mPlongeur.addExercice(exoToAdd);
 				refreshList();
 			}
