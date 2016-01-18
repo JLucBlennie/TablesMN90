@@ -1,5 +1,8 @@
 package com.jlb.plongee.ihm.panels.plongees.types;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.ihm.MN90Constants;
 
@@ -9,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-public class PlongeeSimpleView extends Group {
+public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 
 	protected Label mHeureDepartLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.heuredepart.label"));
@@ -58,6 +61,8 @@ public class PlongeeSimpleView extends Group {
 	protected Line mFlecheDTRPlongee = new Line();
 	protected Line mFlecheDTRPlongee2 = new Line();
 	protected Line mFlecheDTRPlongee3 = new Line();
+
+	private SimpleDateFormat mDateFormat = new SimpleDateFormat("HH:mm");
 
 	public PlongeeSimpleView() {
 		MN90.getLogger().debug(this, "Construction de la vue PlongeeSimple");
@@ -312,5 +317,55 @@ public class PlongeeSimpleView extends Group {
 		mFlecheDTRPlongee3.setStroke(Color.WHITE);
 		mFlecheDTRPlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
 		this.getChildren().add(mFlecheDTRPlongee3);
+	}
+
+	@Override
+	public void setHeureDepartValuePlongee1(long hdms) {
+		mHeureDepartValue.setText(mDateFormat.format(new Date(hdms)));
+	}
+
+	@Override
+	public void setHeureDepartValuePlongee2(long hdms) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setHeureSortieValuePlongee1(long hdms) {
+		mHeureSortieValue.setText(mDateFormat.format(new Date(hdms)));
+	}
+
+	@Override
+	public void setHeureSortieValuePlongee2(long hdms) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setDTRValuePlongee1(int dtr) {
+		mDTRValue.setText(String.valueOf(dtr));
+	}
+
+	@Override
+	public void setDTRValuePlongee2(int dtr) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setProfondeurMaxValuePlongee1(int profMax) {
+		mProfMaxValue.setText(String.valueOf(profMax));
+	}
+
+	@Override
+	public void setProfondeurMaxValuePlongee2(int profMax) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setTempsPlongeeValuePlongee1(int tpsPlongee) {
+		mDureePlongeeValue.setText(String.valueOf(tpsPlongee));
+	}
+
+	@Override
+	public void setTempsPlongeeValuePlongee2(int tpsPlongee) {
+		// Rien a faire => une seule plongee dans la vue
 	}
 }

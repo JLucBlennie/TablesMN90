@@ -87,6 +87,10 @@ public abstract class Plongee extends Entity {
 		return (String) getAttribute(ATTRIBUTE_NAME).getValue();
 	}
 
+	public int getDTR() {
+		return mTablePlongee.getDTR();
+	}
+
 	@Override
 	public String toString() {
 		return "Plongee " + getName() + " [" + getProfondeur() + " " + ATTRIBUTE_PROFONDEUR_UNIT + " ; "

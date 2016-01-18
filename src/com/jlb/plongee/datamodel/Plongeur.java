@@ -8,9 +8,7 @@ import java.util.List;
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.datamodel.logbook.LogBook;
-import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.datamodel.plongees.PlongeeLogBook;
-import com.jlb.plongee.datamodel.table.mn90.exception.PalierNonTrouveException;
 import com.jlb.tools.csv.CSVReader;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.attributes.impl.StringAttribute;
@@ -64,12 +62,6 @@ public class Plongeur extends Entity {
 		// Definition des Attributs
 		StringAttribute attrName = new StringAttribute(ATTRIBUTE_NAME, nom);
 		mAttributes.add(attrName);
-	}
-
-	public void plonge(int i) throws PalierNonTrouveException {
-		Plongee plongee = (Plongee) getChildOfType(Plongee.class.getName(), i);
-		MN90.getLogger().debug(this, "Calcul de " + plongee);
-		plongee.plonge();
 	}
 
 	public void addExercice(Exercice exercice) {

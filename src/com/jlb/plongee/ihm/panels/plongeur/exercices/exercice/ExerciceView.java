@@ -3,9 +3,8 @@ package com.jlb.plongee.ihm.panels.plongeur.exercices.exercice;
 import com.jlb.plongee.application.MN90;
 import com.jlb.plongee.datamodel.exercices.E_TYPE_EXERCICE;
 import com.jlb.plongee.datamodel.exercices.E_TYPE_PLONGEE_EXERCICE;
+import com.jlb.plongee.ihm.panels.plongees.PlongeesView;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -24,11 +23,14 @@ public class ExerciceView extends GridPane {
 	private ComboBox<String> mTypePlongee1 = new ComboBox<String>(
 			FXCollections.observableList(E_TYPE_PLONGEE_EXERCICE.getNames()));
 
+	private PlongeesView mPlongeesView;
+
 	public ExerciceView(Pane plongeesView) {
 		MN90.getLogger().debug(this, "Contruction de la vue Exercice");
+		mPlongeesView = (PlongeesView) plongeesView;
 
 		MN90.getLogger().debug(this, "Ajout des composants à la vue Exercice");
-		this.add(plongeesView, 0, 0);
+		this.add(mPlongeesView, 0, 0);
 		this.add(initPlongeePane(), 2, 0);
 		this.setPadding(new Insets(0, 0, 0, 50));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
@@ -50,15 +52,6 @@ public class ExerciceView extends GridPane {
 		plongeePane.add(mPlongee1TypeLabel, 0, 1);
 		plongeePane.add(mTypePlongee1, 1, 1);
 		mTypePlongee1.setValue(E_TYPE_PLONGEE_EXERCICE.SIMPLE.getLabel());
-		mTypePlongee1.valueProperty().addListener(new ChangeListener<String>() {
-
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				MN90.getLogger().debug(this, "Changement du type de plongee de " + oldValue + " a " + newValue);
-				// TODO : Ici on pourra mettre a jour la vue graphique de la
-				// premiere plongee
-			}
-		});
 
 		return plongeePane;
 
@@ -81,15 +74,19 @@ public class ExerciceView extends GridPane {
 		mPlongee1Name.setText(name);
 	}
 
-	public String getPlongee1Name() {
+	public String getNamePlongee1() {
 		return mPlongee1Name.getText();
 	}
 
-	public void setPlongee1Type(String type) {
+	public void setTypePlongee1(String type) {
 		mTypePlongee1.setValue(type);
 	}
 
-	public String getPlongee1Type() {
+	public String getTypeValuePlongee1() {
 		return mTypePlongee1.getValue();
+	}
+
+	public ComboBox<String> getTypePlongee1() {
+		return mTypePlongee1;
 	}
 }
