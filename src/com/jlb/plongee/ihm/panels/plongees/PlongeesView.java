@@ -14,6 +14,8 @@ import javafx.scene.layout.GridPane;
 public class PlongeesView extends GridPane {
 
 	List<IPlongeeExerciceView> mPlongeeExerciceViews = new ArrayList<IPlongeeExerciceView>();
+	private int mNbPaliersPlongee1 = 0;
+	private int mNbPaliersPlongee2 = 0;
 
 	public PlongeesView() {
 		initViews();
@@ -26,6 +28,16 @@ public class PlongeesView extends GridPane {
 
 	private void initViews() {
 		mPlongeeExerciceViews.add(new PlongeeSimpleView());
+	}
+
+	public void setNbPaliersPlongee1(int nbPaliers) {
+		mNbPaliersPlongee1 = nbPaliers;
+		// Faire un refresh de la vue en fonction de ce nb de paliers
+	}
+
+	public void setNbPaliersPlongee2(int nbPaliers) {
+		mNbPaliersPlongee2 = nbPaliers;
+		// Faire un refresh de la vue en fonction de ce nb de paliers
 	}
 
 	public void setHeureDepartValuePlongee1(long hdms) {
@@ -87,4 +99,89 @@ public class PlongeesView extends GridPane {
 			plongeeView.setTempsPlongeeValuePlongee2(tpsPlongee);
 		}
 	}
+
+	public void setTempsPalier3mValuePlongee1(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier3mValuePlongee1(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier6mValuePlongee1(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier6mValuePlongee1(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier9mValuePlongee1(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier9mValuePlongee1(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier12mValuePlongee1(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier12mValuePlongee1(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier15mValuePlongee1(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier15mValuePlongee1(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier3mValuePlongee2(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier3mValuePlongee2(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier6mValuePlongee2(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier6mValuePlongee2(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier9mValuePlongee2(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier9mValuePlongee2(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier12mValuePlongee2(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier12mValuePlongee2(tpsPalier);
+		}
+	}
+
+	public void setTempsPalier15mValuePlongee2(int tpsPalier) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setTempsPalier15mValuePlongee2(tpsPalier);
+		}
+	}
+
+	public void setGPSValuePlongee1(String gps) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setGPSValuePlongee1(gps);
+		}
+	}
+
+	public void setGPSValuePlongee2(String gps) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setGPSValuePlongee2(gps);
+		}
+	}
+
+	public void setIntervalleValue(int tpsIntervalle) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setIntervalleValue(tpsIntervalle);
+		}
+	}
+
+	public void setMajorationValue(int tpsMajo) {
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.setMajorationValue(tpsMajo);
+		}
+	}
+
 }

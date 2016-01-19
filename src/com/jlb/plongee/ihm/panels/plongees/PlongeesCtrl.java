@@ -47,6 +47,13 @@ public class PlongeesCtrl implements IController<PlongeesView> {
 		mView.setProfondeurMaxValuePlongee1(plongee1.getProfondeur());
 		mView.setTempsPlongeeValuePlongee1((int) plongee1.getAttribute(Plongee.ATTRIBUTE_TEMPS_PLONGEES).getValue());
 		// Gestion des Temps de paliers
+		mView.setNbPaliersPlongee1(plongee1.getNbPaliers());
+		mView.setTempsPalier3mValuePlongee1(plongee1.getTpsPalier(3));
+		mView.setTempsPalier6mValuePlongee1(plongee1.getTpsPalier(6));
+		mView.setTempsPalier9mValuePlongee1(plongee1.getTpsPalier(9));
+		mView.setTempsPalier12mValuePlongee1(plongee1.getTpsPalier(12));
+		mView.setTempsPalier15mValuePlongee1(plongee1.getTpsPalier(15));
+		mView.setGPSValuePlongee1(plongee1.getGPS());
 
 		if (plongee2 != null) {
 			mView.setHeureDepartValuePlongee2(time);
@@ -58,6 +65,13 @@ public class PlongeesCtrl implements IController<PlongeesView> {
 			mView.setTempsPlongeeValuePlongee2(
 					(int) plongee1.getAttribute(Plongee.ATTRIBUTE_TEMPS_PLONGEES).getValue());
 			// Gestion des Temps de paliers
+			mView.setNbPaliersPlongee2(plongee2.getNbPaliers());
+			mView.setTempsPalier3mValuePlongee2(plongee2.getTpsPalier(3));
+			mView.setTempsPalier6mValuePlongee2(plongee2.getTpsPalier(6));
+			mView.setTempsPalier9mValuePlongee2(plongee2.getTpsPalier(9));
+			mView.setTempsPalier12mValuePlongee2(plongee2.getTpsPalier(12));
+			mView.setTempsPalier15mValuePlongee2(plongee2.getTpsPalier(15));
+			mView.setGPSValuePlongee2(plongee2.getGPS());
 
 		}
 	}

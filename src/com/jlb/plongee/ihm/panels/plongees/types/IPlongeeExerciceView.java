@@ -12,6 +12,18 @@ public interface IPlongeeExerciceView {
 
 	public void setTempsPlongeeValuePlongee1(int tpsPlongee);
 
+	public void setTempsPalier3mValuePlongee1(int tpsPalier);
+
+	public void setTempsPalier6mValuePlongee1(int tpsPalier);
+
+	public void setTempsPalier9mValuePlongee1(int tpsPalier);
+
+	public void setTempsPalier12mValuePlongee1(int tpsPalier);
+
+	public void setTempsPalier15mValuePlongee1(int tpsPalier);
+
+	public void setGPSValuePlongee1(String gps);
+
 	public void setHeureDepartValuePlongee2(long hdms);
 
 	public void setHeureSortieValuePlongee2(long hdms);
@@ -21,4 +33,20 @@ public interface IPlongeeExerciceView {
 	public void setProfondeurMaxValuePlongee2(int profMax);
 
 	public void setTempsPlongeeValuePlongee2(int tpsPlongee);
+
+	public void setTempsPalier3mValuePlongee2(int tpsPalier);
+
+	public void setTempsPalier6mValuePlongee2(int tpsPalier);
+
+	public void setTempsPalier9mValuePlongee2(int tpsPalier);
+
+	public void setTempsPalier12mValuePlongee2(int tpsPalier);
+
+	public void setTempsPalier15mValuePlongee2(int tpsPalier);
+
+	public void setGPSValuePlongee2(String gps);
+
+	public void setIntervalleValue(int tpsIntervalle);
+
+	public void setMajorationValue(int tpsMajo);
 }

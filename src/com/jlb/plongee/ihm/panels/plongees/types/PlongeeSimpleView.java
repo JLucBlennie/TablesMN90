@@ -62,6 +62,10 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 	protected Line mFlecheDTRPlongee2 = new Line();
 	protected Line mFlecheDTRPlongee3 = new Line();
 
+	protected Label mGPSLabel = new Label(
+			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.gps.label"));
+	protected TextField mGPSValue = new TextField("A");
+
 	private SimpleDateFormat mDateFormat = new SimpleDateFormat("HH:mm");
 
 	public PlongeeSimpleView() {
@@ -317,6 +321,17 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 		mFlecheDTRPlongee3.setStroke(Color.WHITE);
 		mFlecheDTRPlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
 		this.getChildren().add(mFlecheDTRPlongee3);
+
+		mGPSLabel.setTranslateX(250);
+		mGPSLabel.setTranslateY(250);
+		this.getChildren().add(mGPSLabel);
+
+		mGPSValue.setPrefWidth(50);
+		mGPSValue.setMaxWidth(50);
+		mGPSValue.setMinWidth(50);
+		mGPSValue.setTranslateX(290);
+		mGPSValue.setTranslateY(245);
+		this.getChildren().add(mGPSValue);
 	}
 
 	@Override
@@ -368,4 +383,80 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 	public void setTempsPlongeeValuePlongee2(int tpsPlongee) {
 		// Rien a faire => une seule plongee dans la vue
 	}
+
+	@Override
+	public void setTempsPalier3mValuePlongee1(int tpsPalier) {
+		// TODO Auto-generated method stub
+		mDureePalier3mValue.setText(String.valueOf(tpsPalier));
+	}
+
+	@Override
+	public void setTempsPalier6mValuePlongee1(int tpsPalier) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTempsPalier9mValuePlongee1(int tpsPalier) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTempsPalier12mValuePlongee1(int tpsPalier) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTempsPalier15mValuePlongee1(int tpsPalier) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setTempsPalier3mValuePlongee2(int tpsPalier) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setTempsPalier6mValuePlongee2(int tpsPalier) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setTempsPalier9mValuePlongee2(int tpsPalier) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setTempsPalier12mValuePlongee2(int tpsPalier) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setTempsPalier15mValuePlongee2(int tpsPalier) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setIntervalleValue(int tpsIntervalle) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setMajorationValue(int tpsMajo) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
+	@Override
+	public void setGPSValuePlongee1(String gps) {
+		mGPSValue.setText(gps);
+	}
+
+	@Override
+	public void setGPSValuePlongee2(String gps) {
+		// Rien a faire => une seule plongee dans la vue
+	}
+
 }
