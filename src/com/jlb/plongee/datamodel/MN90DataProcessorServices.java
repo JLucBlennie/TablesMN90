@@ -1,5 +1,6 @@
 package com.jlb.plongee.datamodel;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -40,7 +41,7 @@ public class MN90DataProcessorServices extends DataProcessorServices {
 		super();
 		try {
 			mDatabaseServices = new DatabaseServiceSQLite(databasePath);
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException | IOException e) {
 			MN90.getLogger().error(this, "Erreur lors de la connexion a la base de donnees " + databasePath, e);
 		}
 	}
