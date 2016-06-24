@@ -10,6 +10,8 @@ import com.jlb.plongee.datamodel.Plongeur;
 import com.jlb.plongee.datamodel.exercices.E_TYPE_EXERCICE;
 import com.jlb.plongee.datamodel.exercices.Exercice;
 import com.jlb.plongee.datamodel.logbook.Participant;
+import com.jlb.tools.logging.ILogger;
+import com.jlb.tools.logging.LoggerFactory;
 import com.jlb.tools.metamodel.DataProcessorServices;
 import com.jlb.tools.metamodel.Entity;
 import com.jlb.tools.metamodel.criterion.E_OPERATOR;
@@ -17,13 +19,15 @@ import com.jlb.tools.metamodel.criterion.impl.AllCriterion;
 import com.jlb.tools.metamodel.criterion.impl.IntegerCriterion;
 
 public class DatabaseTests {
+	private static ILogger mLogger = LoggerFactory.createLogger(DatabaseTests.class.getName(),
+			DatabaseTests.class.getName() + ".log");
 
 	@Test
 	public void testDatabase() {
 		List<Class<? extends Entity>> clazzs = new ArrayList<Class<? extends Entity>>();
 		clazzs.add(Plongeur.class);
 		clazzs.add(Participant.class);
-		DataProcessorServices dpServices = new MN90DataProcessorServices("database/mn90.db");
+		DataProcessorServices dpServices = new MN90DataProcessorServices("database/mn90.db", mLogger);
 		dpServices.createDatabase();
 		Plongeur plongeur = new Plongeur(0, "Moi");
 		plongeur.addExercice(new Exercice(0, "Exercice 1", E_TYPE_EXERCICE.SIMPLE));

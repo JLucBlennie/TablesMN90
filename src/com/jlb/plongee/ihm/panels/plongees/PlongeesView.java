@@ -24,6 +24,7 @@ public class PlongeesView extends GridPane {
 			this.add((Node) plongeeView, 0, 0);
 		}
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
+		// this.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 	}
 
 	private void initViews() {
@@ -184,4 +185,10 @@ public class PlongeesView extends GridPane {
 		}
 	}
 
+	public void resizePlongeeViews(double width, double height) {
+		MN90.getLogger().debug(this, "Changement de taille : " + width + " - " + height);
+		for (IPlongeeExerciceView plongeeView : mPlongeeExerciceViews) {
+			plongeeView.resizeNode(width, height);
+		}
+	}
 }

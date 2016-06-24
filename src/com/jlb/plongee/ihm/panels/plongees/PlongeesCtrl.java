@@ -5,6 +5,10 @@ import com.jlb.plongee.datamodel.plongees.Plongee;
 import com.jlb.plongee.datamodel.plongees.PlongeeExercice;
 import com.jlb.plongee.ihm.IController;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Bounds;
+
 public class PlongeesCtrl implements IController<PlongeesView> {
 
 	private PlongeesView mView = new PlongeesView();
@@ -23,6 +27,15 @@ public class PlongeesCtrl implements IController<PlongeesView> {
 	public void init() {
 		MN90.getLogger().debug(this, "Initialisation de la vue Plongees");
 		mView.setStyle("-fx-background-color: rgba(0, 0, 0, 0);");
+		mView.layoutBoundsProperty().addListener(new ChangeListener<Bounds>() {
+
+			@Override
+			public void changed(final ObservableValue<? extends Bounds> observableValue, final Bounds oldBounds,
+					final Bounds newBounds) {
+				MN90.getLogger().debug(this, "Changement de taille : " + mView.getWidth() + " - " + mView.getHeight());
+				mView.resizePlongeeViews(newBounds.getWidth(), newBounds.getHeight());
+			}
+		});
 	}
 
 	public void emptyPlongee() {
@@ -31,10 +44,12 @@ public class PlongeesCtrl implements IController<PlongeesView> {
 		mView.setDTRValuePlongee1(0);
 		mView.setProfondeurMaxValuePlongee1(0);
 		mView.setTempsPlongeeValuePlongee1(0);
+		MN90.getLogger().debug(this, "Taille de la vue : " + mView.getWidth() + " - " + mView.getHeight());
 	}
 
 	public void showPlongee(PlongeeExercice plongee) {
 		showPlongee(plongee, null);
+		MN90.getLogger().debug(this, "Taille de la vue : " + mView.getWidth() + " - " + mView.getHeight());
 	}
 
 	public void showPlongee(PlongeeExercice plongee1, PlongeeExercice plongee2) {

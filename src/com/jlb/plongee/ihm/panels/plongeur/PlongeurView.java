@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 public class PlongeurView extends GridPane {
 
@@ -26,6 +27,7 @@ public class PlongeurView extends GridPane {
 		this.add(exercicesView, 0, 1, 2, 1);
 		this.setPadding(new Insets(10, 10, 10, 10));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
+		this.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 	}
 
 	public TextField getPlongeurNameText() {

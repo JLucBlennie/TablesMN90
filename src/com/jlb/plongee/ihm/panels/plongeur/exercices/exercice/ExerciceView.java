@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 
 public class ExerciceView extends GridPane {
 
@@ -34,6 +35,8 @@ public class ExerciceView extends GridPane {
 		this.add(initPlongeePane(), 2, 0);
 		this.setPadding(new Insets(0, 0, 0, 50));
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
+		this.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+
 	}
 
 	private Pane initPlongeePane() {

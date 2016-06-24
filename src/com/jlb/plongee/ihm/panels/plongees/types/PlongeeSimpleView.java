@@ -4,26 +4,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.jlb.plongee.application.MN90;
-import com.jlb.plongee.ihm.MN90Constants;
 
-import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
-public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
+public class PlongeeSimpleView extends GridPane implements IPlongeeExerciceView {
 
 	protected Label mHeureDepartLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.heuredepart.label"));
+	protected Image mImgPlongeeFond = new Image("./resources/img/profilsplongees/PlongeeSimple1Palier.png");
+	protected ImageView mImgView = new ImageView();
 	protected TextField mHeureDepartValue = new TextField("09:30");
-	protected Line mSurface = new Line();
-	protected Line mSurface2 = new Line();
-	protected Line mSurface3 = new Line();
-	protected Line mSurface4 = new Line();
-	protected Line mSurface5 = new Line();
-	protected Line mDescente = new Line();
-	protected Line mFond = new Line();
 	protected Label mProfMaxLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.profmax.label"));
 	protected TextField mProfMaxValue = new TextField("30");
@@ -37,30 +34,16 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 	protected TextField mDureePlongeeValue = new TextField("40");
 	protected Label mDureePlongeeUniteLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
-	protected Line mDebutRemontee = new Line();
-	protected Line mPalier3m = new Line();
 	protected Label mPalier3mLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.palier3m.label"));
 	protected TextField mDureePalier3mValue = new TextField("50");
 	protected Label mDureePalier3mUniteLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
-	protected Line mRemonteeFin = new Line();
 	protected Label mDTRLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.dtr.label"));
 	protected TextField mDTRValue = new TextField("40");
 	protected Label mDTRUniteLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.duree.unite.label"));
-	protected Line mMarkDebut = new Line();
-	protected Line mFlecheDureePlongee = new Line();
-	protected Line mFlecheDureePlongee2 = new Line();
-	protected Line mFlecheDureePlongee3 = new Line();
-	protected Line mFlecheDureePlongee4 = new Line();
-	protected Line mFlecheDureePlongee5 = new Line();
-	protected Line mMarkDureePlongee = new Line();
-	protected Line mMarkFinPlongee = new Line();
-	protected Line mFlecheDTRPlongee = new Line();
-	protected Line mFlecheDTRPlongee2 = new Line();
-	protected Line mFlecheDTRPlongee3 = new Line();
 
 	protected Label mGPSLabel = new Label(
 			MN90.TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.view.plongee.simple.gps.label"));
@@ -70,268 +53,128 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 
 	public PlongeeSimpleView() {
 		MN90.getLogger().debug(this, "Construction de la vue PlongeeSimple");
-		mHeureDepartLabel.setTranslateX(-30);
-		mHeureDepartLabel.setTranslateY(0);
-		this.getChildren().add(mHeureDepartLabel);
+		// this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
+		this.setGridLinesVisible(true);
+
+		ColumnConstraints col = new ColumnConstraints();
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(90);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+		// col.setPercentWidth(5);
+		col.setHgrow(Priority.ALWAYS);
+		this.getColumnConstraints().add(col);
+
+		RowConstraints row = new RowConstraints();
+		// row.setPercentHeight(90);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		// row.setPercentHeight(90);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+		row.setVgrow(Priority.ALWAYS);
+		this.getRowConstraints().add(row);
+
+		mImgView.setImage(mImgPlongeeFond);
+		mImgView.setFitWidth(100);
+		mImgView.setManaged(true);
+		mImgView.setPreserveRatio(true);
+		mImgView.setSmooth(true);
+		mImgView.setCache(true);
+		this.add(mImgView, 0, 1, 13, 8);
+
+		this.add(mHeureDepartLabel, 0, 0);
 
 		mHeureDepartValue.setPrefWidth(100);
 		mHeureDepartValue.setMaxWidth(100);
 		mHeureDepartValue.setMinWidth(100);
-		mHeureDepartValue.setTranslateX(5);
-		mHeureDepartValue.setTranslateY(-5);
-		this.getChildren().add(mHeureDepartValue);
+		this.add(mHeureDepartValue, 1, 0, 2, 1);
 
-		mSurface.setStartX(-30);
-		mSurface.setStartY(30);
-		mSurface.setEndX(800);
-		mSurface.setEndY(30);
-		mSurface.setStroke(Color.WHITE);
-		mSurface.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mSurface);
-
-		mSurface2.setStartX(-25);
-		mSurface2.setStartY(35);
-		mSurface2.setEndX(-10);
-		mSurface2.setEndY(35);
-		mSurface2.setStroke(Color.WHITE);
-		mSurface2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mSurface2);
-
-		mSurface3.setStartX(-20);
-		mSurface3.setStartY(40);
-		mSurface3.setEndX(-15);
-		mSurface3.setEndY(40);
-		mSurface3.setStroke(Color.WHITE);
-		mSurface3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mSurface3);
-
-		mSurface4.setStartX(780);
-		mSurface4.setStartY(35);
-		mSurface4.setEndX(795);
-		mSurface4.setEndY(35);
-		mSurface4.setStroke(Color.WHITE);
-		mSurface4.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mSurface4);
-
-		mSurface5.setStartX(785);
-		mSurface5.setStartY(40);
-		mSurface5.setEndX(790);
-		mSurface5.setEndY(40);
-		mSurface5.setStroke(Color.WHITE);
-		mSurface5.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mSurface5);
-
-		mDescente.setStartX(0);
-		mDescente.setStartY(30);
-		mDescente.setEndX(10);
-		mDescente.setEndY(400);
-		mDescente.setStroke(Color.WHITE);
-		mDescente.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mDescente);
-
-		mFond.setStartX(10);
-		mFond.setStartY(400);
-		mFond.setEndX(550);
-		mFond.setEndY(400);
-		mFond.setStroke(Color.WHITE);
-		mFond.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mFond);
-
-		mProfMaxLabel.setTranslateX((550 - 10) / 2 - 100);
-		mProfMaxLabel.setTranslateY(370);
-		this.getChildren().add(mProfMaxLabel);
+		this.add(mProfMaxLabel, 2, 8);
 
 		mProfMaxValue.setPrefWidth(45);
 		mProfMaxValue.setMaxWidth(45);
 		mProfMaxValue.setMinWidth(45);
-		mProfMaxValue.setTranslateX((550 - 10) / 2);
-		mProfMaxValue.setTranslateY(365);
-		this.getChildren().add(mProfMaxValue);
+		this.add(mProfMaxValue, 3, 8);
 
-		mProfMaxUniteLabel.setTranslateX((550 - 10) / 2 + 50);
-		mProfMaxUniteLabel.setTranslateY(370);
-		this.getChildren().add(mProfMaxUniteLabel);
-
-		mHeureSortieLabel.setTranslateX(715);
-		mHeureSortieLabel.setTranslateY(0);
-		this.getChildren().add(mHeureSortieLabel);
+		this.add(mHeureSortieLabel, 10, 0);
 
 		mHeureSortieValue.setPrefWidth(100);
 		mHeureSortieValue.setMaxWidth(100);
 		mHeureSortieValue.setMinWidth(100);
-		mHeureSortieValue.setTranslateX(750);
-		mHeureSortieValue.setTranslateY(-5);
-		this.getChildren().add(mHeureSortieValue);
+		this.add(mHeureSortieValue, 11, 0, 2, 1);
 
-		mDureePlongeeLabel.setTranslateX((550 - 10) / 2 - 100);
-		mDureePlongeeLabel.setTranslateY(405);
-		this.getChildren().add(mDureePlongeeLabel);
+		this.add(mDureePlongeeLabel, 2, 7);
 
 		mDureePlongeeValue.setPrefWidth(45);
 		mDureePlongeeValue.setMaxWidth(45);
 		mDureePlongeeValue.setMinWidth(45);
-		mDureePlongeeValue.setTranslateX((550 - 10) / 2);
-		mDureePlongeeValue.setTranslateY(400);
-		this.getChildren().add(mDureePlongeeValue);
+		this.add(mDureePlongeeValue, 3, 7);
 
-		mDureePlongeeUniteLabel.setTranslateX((550 - 10) / 2 + 50);
-		mDureePlongeeUniteLabel.setTranslateY(405);
-		this.getChildren().add(mDureePlongeeUniteLabel);
-
-		mDebutRemontee.setStartX(550);
-		mDebutRemontee.setStartY(400);
-		mDebutRemontee.setEndX(650);
-		mDebutRemontee.setEndY(80);
-		mDebutRemontee.setStroke(Color.WHITE);
-		mDebutRemontee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mDebutRemontee);
-
-		mPalier3m.setStartX(650);
-		mPalier3m.setStartY(80);
-		mPalier3m.setEndX(750);
-		mPalier3m.setEndY(80);
-		mPalier3m.setStroke(Color.WHITE);
-		mPalier3m.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mPalier3m);
-
-		mPalier3mLabel.setTranslateX(680);
-		mPalier3mLabel.setTranslateY(50);
-		this.getChildren().add(mPalier3mLabel);
+		this.add(mPalier3mLabel, 11, 2);
 
 		mDureePalier3mValue.setPrefWidth(50);
 		mDureePalier3mValue.setMaxWidth(50);
 		mDureePalier3mValue.setMinWidth(50);
-		mDureePalier3mValue.setTranslateX(665);
-		mDureePalier3mValue.setTranslateY(80);
-		this.getChildren().add(mDureePalier3mValue);
+		this.add(mDureePalier3mValue, 11, 3);
 
-		mDureePalier3mUniteLabel.setTranslateX(705);
-		mDureePalier3mUniteLabel.setTranslateY(80);
-		this.getChildren().add(mDureePalier3mUniteLabel);
-
-		mRemonteeFin.setStartX(750);
-		mRemonteeFin.setStartY(80);
-		mRemonteeFin.setEndX(770);
-		mRemonteeFin.setEndY(30);
-		mRemonteeFin.setStroke(Color.WHITE);
-		mRemonteeFin.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_PLONGEE);
-		this.getChildren().add(mRemonteeFin);
-
-		mDTRLabel.setTranslateX(640);
-		mDTRLabel.setTranslateY(405);
-		this.getChildren().add(mDTRLabel);
+		this.add(mDTRLabel, 10, 8);
 
 		mDTRValue.setPrefWidth(50);
 		mDTRValue.setMaxWidth(50);
 		mDTRValue.setMinWidth(50);
-		mDTRValue.setTranslateX(680);
-		mDTRValue.setTranslateY(400);
-		this.getChildren().add(mDTRValue);
+		this.add(mDTRValue, 11, 8);
 
-		mDTRUniteLabel.setTranslateX(725);
-		mDTRUniteLabel.setTranslateY(405);
-		this.getChildren().add(mDTRUniteLabel);
-
-		MN90.getLogger().debug(this, "Création des marqueurs de durée dans la vue PlongeeSimple");
-
-		mMarkDebut.setStartX(0);
-		mMarkDebut.setStartY(30);
-		mMarkDebut.setEndX(0);
-		mMarkDebut.setEndY(450);
-		mMarkDebut.setStroke(Color.WHITE);
-		mMarkDebut.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mMarkDebut);
-
-		mFlecheDureePlongee.setStartX(0);
-		mFlecheDureePlongee.setStartY(440);
-		mFlecheDureePlongee.setEndX(550);
-		mFlecheDureePlongee.setEndY(440);
-		mFlecheDureePlongee.setStroke(Color.WHITE);
-		mFlecheDureePlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDureePlongee);
-
-		mFlecheDureePlongee2.setStartX(0);
-		mFlecheDureePlongee2.setStartY(440);
-		mFlecheDureePlongee2.setEndX(5);
-		mFlecheDureePlongee2.setEndY(445);
-		mFlecheDureePlongee2.setStroke(Color.WHITE);
-		mFlecheDureePlongee2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDureePlongee2);
-
-		mFlecheDureePlongee3.setStartX(0);
-		mFlecheDureePlongee3.setStartY(440);
-		mFlecheDureePlongee3.setEndX(5);
-		mFlecheDureePlongee3.setEndY(435);
-		mFlecheDureePlongee3.setStroke(Color.WHITE);
-		mFlecheDureePlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDureePlongee3);
-
-		mFlecheDureePlongee4.setStartX(555);
-		mFlecheDureePlongee4.setStartY(435);
-		mFlecheDureePlongee4.setEndX(545);
-		mFlecheDureePlongee4.setEndY(445);
-		mFlecheDureePlongee4.setStroke(Color.WHITE);
-		mFlecheDureePlongee4.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDureePlongee4);
-
-		mFlecheDureePlongee5.setStartX(555);
-		mFlecheDureePlongee5.setStartY(445);
-		mFlecheDureePlongee5.setEndX(545);
-		mFlecheDureePlongee5.setEndY(435);
-		mFlecheDureePlongee5.setStroke(Color.WHITE);
-		mFlecheDureePlongee5.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDureePlongee5);
-
-		mMarkDureePlongee.setStartX(550);
-		mMarkDureePlongee.setStartY(30);
-		mMarkDureePlongee.setEndX(550);
-		mMarkDureePlongee.setEndY(450);
-		mMarkDureePlongee.setStroke(Color.WHITE);
-		mMarkDureePlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mMarkDureePlongee);
-
-		mMarkFinPlongee.setStartX(770);
-		mMarkFinPlongee.setStartY(30);
-		mMarkFinPlongee.setEndX(770);
-		mMarkFinPlongee.setEndY(450);
-		mMarkFinPlongee.setStroke(Color.WHITE);
-		mMarkFinPlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mMarkFinPlongee);
-
-		mFlecheDTRPlongee.setStartX(550);
-		mFlecheDTRPlongee.setStartY(440);
-		mFlecheDTRPlongee.setEndX(770);
-		mFlecheDTRPlongee.setEndY(440);
-		mFlecheDTRPlongee.setStroke(Color.WHITE);
-		mFlecheDTRPlongee.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDTRPlongee);
-
-		mFlecheDTRPlongee2.setStartX(770);
-		mFlecheDTRPlongee2.setStartY(440);
-		mFlecheDTRPlongee2.setEndX(765);
-		mFlecheDTRPlongee2.setEndY(445);
-		mFlecheDTRPlongee2.setStroke(Color.WHITE);
-		mFlecheDTRPlongee2.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDTRPlongee2);
-
-		mFlecheDTRPlongee3.setStartX(770);
-		mFlecheDTRPlongee3.setStartY(440);
-		mFlecheDTRPlongee3.setEndX(765);
-		mFlecheDTRPlongee3.setEndY(435);
-		mFlecheDTRPlongee3.setStroke(Color.WHITE);
-		mFlecheDTRPlongee3.setStrokeWidth(MN90Constants.EPAISSEUR_TRAIT_MARQUEUR);
-		this.getChildren().add(mFlecheDTRPlongee3);
-
-		mGPSLabel.setTranslateX(250);
-		mGPSLabel.setTranslateY(250);
-		this.getChildren().add(mGPSLabel);
+		this.add(mGPSLabel, 10, 7);
 
 		mGPSValue.setPrefWidth(50);
 		mGPSValue.setMaxWidth(50);
 		mGPSValue.setMinWidth(50);
-		mGPSValue.setTranslateX(290);
-		mGPSValue.setTranslateY(245);
-		this.getChildren().add(mGPSValue);
+		this.add(mGPSValue, 11, 7);
 	}
 
 	@Override
@@ -459,4 +302,26 @@ public class PlongeeSimpleView extends Group implements IPlongeeExerciceView {
 		// Rien a faire => une seule plongee dans la vue
 	}
 
+	@Override
+	public void resizeNode(double width, double height) {
+		MN90.getLogger().debug(this, "Changement de taille : " + width + " - " + height);
+		double widthForFit = width > height ? width : height;
+		for (int i = 0; i < this.getColumnConstraints().size(); i++) {
+			double value = 5;
+			if (i == 1) {
+				value = 10;
+			}
+			this.getColumnConstraints().get(i).setPercentWidth(value);
+		}
+
+		for (int i = 0; i < this.getRowConstraints().size(); i++) {
+			double value = 5;
+			if (i == 0) {
+				value = 5;
+			}
+			this.getRowConstraints().get(i).setPercentHeight(value);
+		}
+		if (mImgView.getFitWidth() != widthForFit)
+			mImgView.setFitWidth(widthForFit);
+	}
 }

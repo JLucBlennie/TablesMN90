@@ -12,6 +12,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.TextAlignment;
 
@@ -57,7 +58,12 @@ public class MN90View extends GridPane {
 		this.add(plongeurPane, 0, 0);
 		this.mVersion.setId("version");
 		this.mVersion.setTextAlignment(TextAlignment.CENTER);
+		GridPane.setValignment(mVersion, VPos.BOTTOM);
 		this.add(mVersion, 0, 2);
+
+		this.setPrefSize(MN90.WINDOW_WIDTH, MN90.WINDOW_HEIGHT);
+		this.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+
 	}
 
 	public Button getExitButton() {

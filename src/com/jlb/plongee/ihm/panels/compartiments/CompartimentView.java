@@ -5,6 +5,7 @@ import com.jlb.plongee.ihm.widget.UpwardProgress;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 
 public class CompartimentView extends GridPane {
 
@@ -51,5 +52,6 @@ public class CompartimentView extends GridPane {
 		this.add(this.mComp100minProgressBar, 10, 0);
 		this.add(this.mComp120minProgressBar, 11, 0);
 		this.setGridLinesVisible(MN90.AFFICHAGE_GRILLE);
+		this.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 	}
 }

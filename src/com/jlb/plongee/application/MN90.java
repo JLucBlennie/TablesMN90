@@ -47,6 +47,9 @@ public class MN90 extends Application {
 	public static final boolean AFFICHAGE_GRILLE = TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.affichage.grille")
 			.equalsIgnoreCase("true") ? true : false;
 
+	public static int WINDOW_WIDTH = 1250;
+	public static int WINDOW_HEIGHT = 650;
+
 	private static RandomAccessFile mRandomAccessFile;
 	private static FileLock mFileLock;
 	private static File mLockFile = new File("flag");
@@ -82,8 +85,8 @@ public class MN90 extends Application {
 			}
 		});
 
-		System.out.print(mFileLock == null);
 		if (mFileLock == null) {
+			mLogger.info(this, "Une instance existe deja ...");
 			Platform.exit();
 		} else {
 
@@ -91,23 +94,33 @@ public class MN90 extends Application {
 			mLogger.debug(this, "Récupération des données de MN90 => "
 					+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
 			DataProcessorServices dpServices = new MN90DataProcessorServices(
-					TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"));
+					TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.db.filename"), mLogger);
 
 			ICriterion<Entity> plongeursCriterion = new AllCriterion(new Plongeur().getTableName());
 			List<Entity> plongeurs = dpServices.requestEntities(plongeursCriterion);
 
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
+			primaryStage.initStyle(StageStyle.DECORATED);
+			// primaryStage.setFullScreen(true);
+			// primaryStage.setFullScreenExitHint("");
 			mLogger.debug(this, "Création du Controleur de MN90");
 			MN90Ctrl tablesMN90Ctrl = new MN90Ctrl(dpServices, plongeurs);
 
 			mLogger.debug(this, "Création de la Scene JavaFx à partir de la vue principale");
-			Scene scene = new Scene(tablesMN90Ctrl.getView(), 1550, 850, Color.TRANSPARENT);
+			Scene scene = new Scene(tablesMN90Ctrl.getView(), WINDOW_WIDTH, WINDOW_HEIGHT, Color.TRANSPARENT);
 			mLogger.debug(this, "Chargement de la feuille de style "
 					+ TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.css.principal"));
 			scene.getStylesheets().add(TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.css.principal"));
 
 			primaryStage.setTitle(TABLES_MN90_PROPERTIES.getString("com.jlb.plongee.titre"));
 			primaryStage.setScene(scene);
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+				@Override
+				public void handle(WindowEvent event) {
+					tablesMN90Ctrl.exit();
+				}
+
+			});
 		}
 		mLogger.debug(this, "Affichage de l'IHM");
 		primaryStage.show();

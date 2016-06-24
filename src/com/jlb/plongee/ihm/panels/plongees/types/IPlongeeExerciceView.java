@@ -2,6 +2,8 @@ package com.jlb.plongee.ihm.panels.plongees.types;
 
 public interface IPlongeeExerciceView {
 
+	public void resizeNode(double width, double height);
+
 	public void setHeureDepartValuePlongee1(long hdms);
 
 	public void setHeureSortieValuePlongee1(long hdms);
